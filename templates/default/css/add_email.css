@@ -1,0 +1,42 @@
+#container_main #form_content_mail {
+  width: 900px;
+  height: auto;
+  margin: 0 auto;
+}
+
+#container_main #form_content_mail .page_center{
+  width: 900px;
+  height: 1000px;
+  margin: 0 auto;
+  background: #FFF;
+  
+}
+
+#container_main #form_content_mail .page_center .banner_mail{
+  width: 900px;
+  height: 100px;
+  margin: 0 auto;
+  
+  
+/*  background: #005702;*/
+  
+}
+#container_main #form_content_mail .page_center .banner_mail .logo_sendmail{
+  width: 100px;
+  height: 100px;
+  float: left;
+ /* background: url('../img/logo_sendmail.jpg');*/
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100px 100px;
+  
+  /*
+  background: #FFF;
+  */
+}
+
+#container_main #form_content_mail .page_center .input_items{
+  width: 100px;
+  height: 100px;
+  float: left;
+  margin-left: 100px;}
