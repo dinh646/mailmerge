@@ -46,7 +46,7 @@ class Test_apis extends CI_Controller {
 //                $this->apis->editTableTemplates(1, 'Edit ', 'Mrs', 'edit ', 'edit bla bla...');
                 
 //                $this->apis->deleteTableTemplates(1);
-                    $this->apis->sendMail();
+                    $this->apis->sendMail('xinhhuynh@innoria.com', 'Xinh1091646', 'Xinh Huynh', 'phule@innoria.com', 'Subject', 'Message...bla bla....');
                 
                 var_dump($this->apis->getError());
                 

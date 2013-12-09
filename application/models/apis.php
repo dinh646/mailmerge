@@ -486,30 +486,24 @@ class Apis extends CI_Model{
         }
     }
     
-    function sendMail($from_mail=null, $pass=null, $to_mail=null){
+    function sendMail($from_mail=null, $pass=null, $full_name=null, $to_mail=null, $subject=null, $message=null){
         $TAG = 'sendMail';
         
         $config = array(
             'protocol' => 'smtp',
             'smtp_host' => 'ssl://smtp.googlemail.com',
             'smtp_port' => 465,
-            'smtp_user' => 'xinhhuynh@innoria.com',
-            'smtp_pass' => 'Xinh1091646',
+            'smtp_user' => $from_mail,
+            'smtp_pass' => $pass,
             'mailtype' => 'html'
         );
- 
-        // recipient, sender, subject, and you message
-        $to = "phule@innoria.com";
-        $from = "xinhhuynh@innoria.com";
-        $subject = "Test sending email using CodeIgniter Framework";
-        $message = "This is a test email using CodeIgniter. If you can view this email, it means you have successfully send an email using CodeIgniter.";
  
         // load the email library that provided by CI
         $this->load->library('email', $config);
         // this will bind your attributes to email library
         $this->email->set_newline("\r\n");
-        $this->email->from($from, 'Your Company');
-        $this->email->to($to);
+        $this->email->from($from_mail, $full_name);
+        $this->email->to($to_mail);
         $this->email->subject($subject);
         $this->email->message($message);
  
