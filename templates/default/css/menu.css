@@ -1,0 +1,113 @@
+#container_main #menu_main {
+  width: 900px;
+  height: auto;
+  margin: 0 auto;
+}
+
+#container_main #menu_main .menu_main_center{
+  width: 900px;
+  height: 100px;
+  margin: 0 auto;
+  /*background: #eee;*/
+  
+}
+#container_main #menu_main .menu_main_center .banner_mail{
+  width: 900px;
+  height: 100px;
+  margin: 0 auto;
+  float: left;
+  
+/*  background: #005702;*/
+  
+}
+#container_main #menu_main .menu_main_center .banner_mail .logo_sendmail{
+  width: 100px;
+  height: 100px;
+  float: left;
+  background: url('../img/logo_sendmail.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100px 100px;
+  
+  /*
+  background: #FFF;
+  */
+}
+#container_main #menu_main .menu_main_center .text_sent_mail{
+  width: 100px;
+  height: 100px;
+  background: url('../img/text_logo.png');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100px 100px;
+  position: absolute;
+  margin-left:-65px;
+  margin-top:47px;
+  /*
+  background: #FFF;
+  */
+  
+}
+
+#container_main #menu_main .menu_main_center .menu_list{
+  width:700px;
+  height: 100px;
+  margin-left: 100px;
+  float: left;
+  
+  
+}
+
+#container_main #menu_main .menu_main_center .menu_list ul{
+  width:700px;
+  height: 50px;
+  float: left;
+  list-style: none;
+  margin-top: 60px;
+  
+  
+}
+#container_main #menu_main .menu_main_center .menu_list ul li{
+  width:auto;
+  height: 40px;
+  float: left;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  -moz-border-top-left-radius: 5px;
+  -moz-border-top-right-radius: 5px;
+  margin-left: 10px;
+  cursor: pointer;
+   
+}
+#container_main #menu_main .menu_main_center .menu_list ul li.active_menu{
+ 
+  background: #FFF;
+}
+#container_main #menu_main .menu_main_center .menu_list ul li.active_menu .text span{
+ 
+   font-size: 16px;
+ font-weight: bold;
+ font-family: Arial, sans-serif;
+ color: #999;
+}
+
+#container_main #menu_main .menu_main_center .menu_list ul li .text span{
+ font-size: 16px;
+ font-weight: bold;
+ font-family: Arial, sans-serif;
+  
+}
+
+#container_main #menu_main .menu_main_center .menu_list ul li .text span{
+ font-size: 16px;
+ font-weight: bold;
+ font-family: Arial, sans-serif;
+ color: #FFF;
+  
+}
+#container_main #menu_main .menu_main_center .menu_list ul li .text{
+ margin-top: 14px;
+ padding-left: 20px;
+ padding-right: 20px;
+  
+}

@@ -38,7 +38,7 @@
 |
 */
 
-$route['default_controller'] = "test_apis";
+$route['default_controller'] = "home_controller";
 $route['404_override'] = '';
 
 

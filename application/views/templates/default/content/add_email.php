@@ -25,6 +25,9 @@
   </div>
 </div>
 
+
+
+
 <script>
   $('#btn_add_email').click(function (){
     
@@ -47,8 +50,9 @@
           type: 'POST',
           data:data,
           success: function(data){
-             alert(data);
+             //alert(data);
             // window.location=url+"index.php/admin/admin_controller/coupon_page";
+            alert('them thanh cong');
           },
 
          //timeout:5000,
