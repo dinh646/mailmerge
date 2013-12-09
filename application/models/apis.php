@@ -486,4 +486,48 @@ class Apis extends CI_Model{
         }
     }
     
+    function sendMail($from_mail=null, $pass=null, $to_mail=null){
+        $TAG = 'sendMail';
+        
+        $config = array(
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_port' => 465,
+            'smtp_user' => 'xinhhuynh@innoria.com',
+            'smtp_pass' => 'Xinh1091646',
+            'mailtype' => 'html'
+        );
+ 
+        // recipient, sender, subject, and you message
+        $to = "phule@innoria.com";
+        $from = "xinhhuynh@innoria.com";
+        $subject = "Test sending email using CodeIgniter Framework";
+        $message = "This is a test email using CodeIgniter. If you can view this email, it means you have successfully send an email using CodeIgniter.";
+ 
+        // load the email library that provided by CI
+        $this->load->library('email', $config);
+        // this will bind your attributes to email library
+        $this->email->set_newline("\r\n");
+        $this->email->from($from, 'Your Company');
+        $this->email->to($to);
+        $this->email->subject($subject);
+        $this->email->message($message);
+ 
+        // send your email. if it produce an error it will print 'Fail to send your message!' for you
+        $send = $this->email->send();
+        
+         if($send){
+             $this->setStatus(Common_enum::STATUS_CUCCESSFUL);
+         }
+         else{
+//             $this->setError($send->print_debugger());
+            show_error($this->email->print_debugger());
+         }
+         
+         $this->insertTableLogs(Common_enum::ACTION_SEND, $TAG, $this->getError(), $this->getStatus(), $this->current_date, $this->current_date);
+
+    }
+
+
+    
 }
