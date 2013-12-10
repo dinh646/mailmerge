@@ -19,14 +19,31 @@ class Home_controller extends CI_Controller {
   public function index()
 	{
      //load list templates
-      $data['list_template']=$this->apis->getTableTemplates();
+      if(isset($_GET['template'])){
+        $id=$_GET['template'];
+        $data['content_template']=$this->apis->getTableTemplatesById($id);
+        $data['id_template']=$id;
+        $data['list_template']=$this->apis->getTableTemplates();
+        $data['status_active_menu']="send_mail";
+        $data['email_config_list']=$this->apis->getTableEmailConfig();
+        $this->load->view('templates/default/header/header.php');
+        $this->load->view('templates/default/menu/menu.php',$data);
+        $this->load->view('templates/default/content/send_mail.php',$data);
+        $this->load->view('templates/default/footer/footer.php');
+       // var_dump($data['content_template']);
+      }
+      else {
+              $data['list_template']=$this->apis->getTableTemplates();
+              $data['id_template']='default';
+              $data['email_config_list']=$this->apis->getTableEmailConfig();
+              $data['status_active_menu']="send_mail";
+              $this->load->view('templates/default/header/header.php');
+              $this->load->view('templates/default/menu/menu.php',$data);
+              $this->load->view('templates/default/content/send_mail.php');
+              $this->load->view('templates/default/footer/footer.php');
+           }
+    
      
-      
-      $data['status_active_menu']="send_mail";
-      $this->load->view('templates/default/header/header.php');
-      $this->load->view('templates/default/menu/menu.php',$data);
-      $this->load->view('templates/default/content/send_mail.php');
-      $this->load->view('templates/default/footer/footer.php');
       
      
     
@@ -71,9 +88,7 @@ class Home_controller extends CI_Controller {
   }
  public function add_template(){
       
-      $title_email =$_POST['title_email'];
-      $titles_names =$_POST['title_names'];              
-      $full_name =$_POST['full_name']; 
+      $name =$_POST['name'];
       $content =$_POST['content'];  
       $string_image_filter =$_POST['string_image_filter'];
       
@@ -97,7 +112,7 @@ class Home_controller extends CI_Controller {
         }
       }
       
-      $this->apis->insertTableTemplates($title_email, $titles_names, $full_name, $content);
+      $this->apis->insertTableTemplates($name,$content);
       echo $this->apis->getError();
   }
 
@@ -157,6 +172,18 @@ class Home_controller extends CI_Controller {
     
   }
   
+  public function send_mail(){
+    $from_mail=$_POST['from_mail'];
+    $pass=$_POST['pass'];
+    $to_mail=$_POST['to_email'];
+    $subject=$_POST['subject'];
+    $message=$_POST['content'];
+    echo $from_mail."==".$pass."==".$to_mail."==".$subject."==".$message;
+   /* $this->apis->sendMail($from_mail, $pass, $full_name=null, $to_mail, $subject, $message);
+    echo $this->apis->getError();
+    */
+    
+  }
   
   
   

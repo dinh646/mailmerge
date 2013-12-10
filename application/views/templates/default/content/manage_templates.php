@@ -10,9 +10,8 @@
       <div class="info_add_email">
           
           <div class="keyvalueeditor-row" data-orther="1">
-            <input id="param_title_email" type="text" class="keyvalueeditor-key keyvalueeditor_check_status" placeholder="Title email"  name="keyvalueeditor-action" value="">
-            <input id="param_title_names" type="text" class="keyvalueeditor-key keyvalueeditor_check_status" placeholder="Title names"  name="keyvalueeditor-action" value="">
-            <input id="param_full_name" type="text" class="keyvalueeditor-key keyvalueeditor_check_status" placeholder="Full name"  name="keyvalueeditor-action" value="">
+            <input id="param_template_name" type="text" class="keyvalueeditor-key keyvalueeditor_check_status" placeholder="Template name"  name="keyvalueeditor-action" value="">
+            
           </div>
         
         <!--  <input type="submit" value="Them" id="btn_add_email">-->
@@ -82,9 +81,7 @@
 <input type="hidden" value="<?php echo $url;?>" id="hidUrl" >
 <script>
   $('#btn_add_template').click(function (){
-    var title_email = $('#param_title_email').val();
-    var title_names = $('#param_title_names').val();
-    var full_name = $('#param_full_name').val();
+    var param_template_name = $('#param_template_name').val();
     //noi dung bai viet=======================================================>
        var content_ckeditor=CKEDITOR.instances.editor1.getData();//nội dung chi tiết bài viết
           $('#trackingDiv').html(content_ckeditor);
@@ -134,9 +131,7 @@
         
          var data={
                 
-                title_email : title_email,
-                title_names :    title_names,          
-                full_name : full_name,
+                name : param_template_name,
                 content :    content, 
                 string_image_filter : string_image_filter
           }
