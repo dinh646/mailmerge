@@ -15,11 +15,21 @@
 
 #container_main #form_content_mail .page_center{
   width: 900px;
-  height: 1000px;
+  height: auto;
   margin: 0 auto;
   background: #FFF;
+  float: left;
   
 }
+#container_main #form_content_mail .template{
+  width: 150px;
+  height: auto;
+  float: right;
+  margin-top: 10px;
+  margin-right: 50px;
+}
+
+
 
 #container_main #form_content_mail .page_center .banner_mail{
   width: 900px;
@@ -31,4 +41,88 @@
   
 }
 
+#container_main #form_content_mail .page_center .input_items{
+  width: 800px;
+  height: auto;
+  margin: 0;
+  margin-left: 50px;
+  
+}
 
+#container_main #form_content_mail .page_center .editor_form{
+  width: 800px;
+  height: auto;
+  margin-left: 50px;
+}
+
+#container_main #form_content_mail .page_center .img_form{
+  width: 800px;
+  height: auto;
+  margin-left: 50px;
+}
+
+#container_main #form_content_mail .page_center .img_form ul{
+  width: 800px;
+  height: auto;
+  list-style: none;
+  float: left;
+  
+}
+
+#container_main #form_content_mail .page_center .img_form ul li #append_img_content{
+  width: 800px;
+  height: auto;
+  float: left;
+  
+  
+}
+#container_main #form_content_mail .page_center .img_form ul li #append_img_content .preview_post{
+  width: 100px;
+  height: 100px;
+  float: left;
+  margin-left: 10px;
+  margin-top: 10px;
+  
+}
+
+#container_main #form_content_mail .page_center .btn_save{
+  width: 800px;
+  height: auto;
+  float: left;
+  margin-left: 50px;
+  
+}
+
+
+select, input[type="text"] .uneditable-input {
+  display: inline-block;
+  height: 50px;
+  width: 100%;
+  padding: 4px 6px;
+  font-size: 13px;
+  line-height: 18px;
+  color: #555555;
+ 
+}
+#param_titles_name{
+  width: 150px;
+  height: 30px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}
+
+.keyvalueeditor-key, .keyvalueeditor-value {
+  color: #333 !important;
+  padding: 5px !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-bottom: solid thin #CCC !important;
+  border-radius: 0 !important;
+  outline: none !important;
+  margin-right: 10px !important;
+  width: 224px !important;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+}

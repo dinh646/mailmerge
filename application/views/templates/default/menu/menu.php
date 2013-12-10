@@ -23,6 +23,14 @@
               <span>Quản lý templates</span>
             </div>
           </li>
+          
+          <li id="email_config" data-link="email_config" <?php if($status_active_menu=="email_config") echo 'class="active_menu"';?>>
+            <div class="text">
+              <span>Cấu hình mail gửi</span>
+            </div>
+          </li>
+          
+          
         </ul>
       </div>
     </div>
@@ -49,4 +57,9 @@
     
   });
   
+   $('#email_config').click(function (){
+     var url = $('#hidUrl').val();
+     window.location.href = url+"index.php/home_controller/email_config"; 
+    
+  });
 </script>

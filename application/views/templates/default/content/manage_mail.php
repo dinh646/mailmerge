@@ -1,3 +1,4 @@
+<?php $url = base_url();?>
 <div id="form_content_mail">
   <div class="page_center">
     <div class="banner_mail">
@@ -68,7 +69,11 @@
                               <span>'.$titles_names.'</span>
                             </div>
                           </li>
-
+                          <li class="delete_mail">
+                            <div class="text">
+                              <a href="'.$url.'index.php/home_controller/delete_mail?id_mail='.$id.'"><span>del</span></a>
+                            </div>
+                          </li>
                         </ul>';
 
 
