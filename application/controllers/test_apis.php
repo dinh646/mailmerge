@@ -36,6 +36,8 @@ class Test_apis extends CI_Controller {
 //                $this->apis->deleteTableEmails(18);
                 
 //                $this->apis->insertTableEmailConfig('xxx@gmail.com', '123456789@');
+        var_dump($this->apis->getTableEmailConfigById(3));
+                
 //                $this->apis->deleteTableEmailConfig(4);
                 
 //                var_dump($this->apis->getTableEmailConfig());
@@ -46,7 +48,7 @@ class Test_apis extends CI_Controller {
 //                $this->apis->editTableTemplates(1, 'Edit ', 'Mrs', 'edit ', 'edit bla bla...');
                 
 //                $this->apis->deleteTableTemplates(1);
-                    $this->apis->sendMail('xinhhuynh@innoria.com', 'Xinh1091646', 'Xinh Huynh', 'phule@innoria.com', 'Subject', 'Message...bla bla....');
+//                    $this->apis->sendMail('xinhhuynh@innoria.com', 'Xinh1091646', 'Xinh Huynh', 'phule@innoria.com', 'Subject', 'Message...bla bla....');
                 
                 var_dump($this->apis->getError());
                 

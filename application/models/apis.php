@@ -84,6 +84,35 @@ class Apis extends CI_Model{
     }
     
     /**
+     * getTableEmailsById
+     * 
+     * @param int $id
+     * @return Array
+     */
+    public function getTableEmailsById($id) {
+        
+        $this->load->database();
+        $results = array();
+        
+        $select_all = $this->db->get_where(Emails_enum::TABLE_NAME, array(Emails_enum::ID => $id))->result();
+        foreach ($select_all as $value) {
+           
+            $row = array(
+                         Emails_enum::ID => $value->id,
+                         Emails_enum::EMAIL => $value->email,
+                         Emails_enum::TITLES_NAMES => $value->titles_names,
+                         Emails_enum::FULL_NAME => $value->full_name,
+                         Emails_enum::CREATED_DATE => $value->created_date,
+                         Emails_enum::UPDATED_DATE => $value->updated_date,
+            );
+            
+            $results[]=$row;
+        }
+        
+        return $results;
+    }
+    
+    /**
      * insertTableEmails
      * 
      * @param String $email
@@ -199,6 +228,31 @@ class Apis extends CI_Model{
         $results = array();
         
         $select_all = $this->db->get(Email_config_enum::TABLE_NAME)->result();
+        foreach ($select_all as $value) {
+            $row = array(
+                         Email_config_enum::ID => $value->id,
+                         Email_config_enum::EMAIL_SEND => $value->email_send,
+                         Email_config_enum::PASSWORD => $value->password,
+                         Email_config_enum::CREATED_DATE => $value->created_date,
+                         Email_config_enum::UPDATED_DATE => $value->updated_date
+            );
+            
+            $results[]=$row;
+        }
+        return $results;
+    }
+    
+    /**
+     * getTableEmailConfigById
+     * 
+     * @param int $id
+     * @return Array
+     */
+    public function getTableEmailConfigById($id) {
+        $this->load->database();
+        $results = array();
+        
+        $select_all = $this->db->get_where(Email_config_enum::TABLE_NAME, array(Email_config_enum::ID => $id))->result();
         foreach ($select_all as $value) {
             $row = array(
                          Email_config_enum::ID => $value->id,
@@ -365,6 +419,33 @@ class Apis extends CI_Model{
         $this->load->database();
         $results = array();
         $select_all = $this->db->get(Templates_enum::TABLE_NAME)->result();
+        foreach ($select_all as $value) {
+            $row = array(
+                         Templates_enum::ID => $value->id,
+                         Templates_enum::TITLE_EMAIL => $value->title_email,
+                         Templates_enum::TITLES_NAMES => $value->titles_names,
+                         Templates_enum::FULL_NAME => $value->full_name,
+                         Templates_enum::CONTENT => $value->content,
+                         Templates_enum::CREATED_DATE => $value->created_date,
+                         Templates_enum::UPDATED_DATE => $value->updated_date
+            );
+            
+            $results[]=$row;
+        }
+        
+        return $results;
+    }
+    
+    /**
+     * getTableTemplatesById
+     * 
+     * @param int $id
+     * @return Array
+     */
+    public function getTableTemplatesById($id) {
+        $this->load->database();
+        $results = array();
+        $select_all = $this->db->get_where(Templates_enum::TABLE_NAME, array(Templates_enum::ID => $id))->result();
         foreach ($select_all as $value) {
             $row = array(
                          Templates_enum::ID => $value->id,
