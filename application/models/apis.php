@@ -422,9 +422,7 @@ class Apis extends CI_Model{
         foreach ($select_all as $value) {
             $row = array(
                          Templates_enum::ID => $value->id,
-                         Templates_enum::TITLE_EMAIL => $value->title_email,
-                         Templates_enum::TITLES_NAMES => $value->titles_names,
-                         Templates_enum::FULL_NAME => $value->full_name,
+                         Templates_enum::NAME => $value->name,
                          Templates_enum::CONTENT => $value->content,
                          Templates_enum::CREATED_DATE => $value->created_date,
                          Templates_enum::UPDATED_DATE => $value->updated_date
@@ -449,9 +447,7 @@ class Apis extends CI_Model{
         foreach ($select_all as $value) {
             $row = array(
                          Templates_enum::ID => $value->id,
-                         Templates_enum::TITLE_EMAIL => $value->title_email,
-                         Templates_enum::TITLES_NAMES => $value->titles_names,
-                         Templates_enum::FULL_NAME => $value->full_name,
+                         Templates_enum::NAME => $value->name,
                          Templates_enum::CONTENT => $value->content,
                          Templates_enum::CREATED_DATE => $value->created_date,
                          Templates_enum::UPDATED_DATE => $value->updated_date
@@ -466,18 +462,14 @@ class Apis extends CI_Model{
     /**
      * insertTableTemplates
      * 
-     * @param String $title_email
-     * @param String $titles_names
-     * @param String $full_name
+     * @param String $name
      * @param String $content
      * @param String $c_d
      * @param String $u_d
      */
-    public function insertTableTemplates($title_email, $titles_names, $full_name, $content, $c_d = null, $u_d = null) {
+    public function insertTableTemplates($name, $content, $c_d = null, $u_d = null) {
         $data = array(
-                      Templates_enum::TITLE_EMAIL => $title_email,
-                      Templates_enum::TITLES_NAMES => $titles_names,
-                      Templates_enum::FULL_NAME => $full_name,
+                      Templates_enum::NAME => $name,
                       Templates_enum::CONTENT => $content,
                       Templates_enum::CREATED_DATE => ($c_d == null)? $this->current_date : $c_d,
                       Templates_enum::UPDATED_DATE => ($u_d == null)? $this->current_date : $u_d
@@ -505,18 +497,14 @@ class Apis extends CI_Model{
      * editTableTemplates
      * 
      * @param int $id
-     * @param String $title_email
-     * @param String $titles_names
-     * @param String $full_name
+     * @param String $name
      * @param String $content
      * @param String $c_d
      * @param String $u_d
      */
-    public function editTableTemplates($id, $title_email, $titles_names, $full_name, $content, $c_d = null, $u_d = null) {
+    public function editTableTemplates($id, $name, $content, $c_d = null, $u_d = null) {
         $data = array(
-                      Templates_enum::TITLE_EMAIL => $title_email,
-                      Templates_enum::TITLES_NAMES => $titles_names,
-                      Templates_enum::FULL_NAME => $full_name,
+                      Templates_enum::FULL_NAME => $name,
                       Templates_enum::CONTENT => $content,
 //                      Email_config_enum::CREATED_DATE => ($c_d == null)? $this->current_date : $c_d,
                       Templates_enum::UPDATED_DATE => ($u_d == null)? $this->current_date : $u_d

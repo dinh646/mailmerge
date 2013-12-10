@@ -36,13 +36,13 @@ class Test_apis extends CI_Controller {
 //                $this->apis->deleteTableEmails(18);
                 
 //                $this->apis->insertTableEmailConfig('xxx@gmail.com', '123456789@');
-        var_dump($this->apis->getTableEmailConfigById(3));
+//        var_dump($this->apis->getTableEmailConfigById(3));
                 
 //                $this->apis->deleteTableEmailConfig(4);
                 
 //                var_dump($this->apis->getTableEmailConfig());
                 
-//                $this->apis->insertTableTemplates('Title email', 'Mrs', 'XYZ', 'bla bla...');
+                $this->apis->insertTableTemplates('Spring', 'bla bla...');
                 
 //                var_dump($this->apis->getTableTemplates());
 //                $this->apis->editTableTemplates(1, 'Edit ', 'Mrs', 'edit ', 'edit bla bla...');

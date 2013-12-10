@@ -13,9 +13,7 @@
  */
 class Templates_enum {
     const  ID = 'id';
-    const TITLE_EMAIL = 'title_email';
-    const TITLES_NAMES = 'titles_names';
-    const FULL_NAME = 'full_name';
+    const NAME = 'name';
     const CONTENT = 'content';
     const CREATED_DATE = 'created_date';
     const UPDATED_DATE = 'updated_date';
