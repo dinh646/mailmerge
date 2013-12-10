@@ -233,6 +233,10 @@ class Apis extends CI_Model{
                          Email_config_enum::ID => $value->id,
                          Email_config_enum::EMAIL_SEND => $value->email_send,
                          Email_config_enum::PASSWORD => $value->password,
+                         Email_config_enum::PROTOCOL => $value->protocol,
+                         Email_config_enum::SMTP_HOST => $value->smtp_host,
+                         Email_config_enum::SMTP_PORT => $value->smtp_port,
+                         Email_config_enum::MAIL_TYPE => $value->mailtype,
                          Email_config_enum::CREATED_DATE => $value->created_date,
                          Email_config_enum::UPDATED_DATE => $value->updated_date
             );
@@ -258,6 +262,10 @@ class Apis extends CI_Model{
                          Email_config_enum::ID => $value->id,
                          Email_config_enum::EMAIL_SEND => $value->email_send,
                          Email_config_enum::PASSWORD => $value->password,
+                         Email_config_enum::PROTOCOL => $value->protocol,
+                         Email_config_enum::SMTP_HOST => $value->smtp_host,
+                         Email_config_enum::SMTP_PORT => $value->smtp_port,
+                         Email_config_enum::MAIL_TYPE => $value->mailtype,
                          Email_config_enum::CREATED_DATE => $value->created_date,
                          Email_config_enum::UPDATED_DATE => $value->updated_date
             );
@@ -275,10 +283,19 @@ class Apis extends CI_Model{
      * @param String $c_d
      * @param String $u_d
      */
-    public function insertTableEmailConfig($email_send, $password, $c_d = null, $u_d = null) {
+    public function insertTableEmailConfig($email_send, $password, 
+                                           $protocol = Email_config_enum::PROTOCOL_DEFAULT, 
+                                           $smtp_host = Email_config_enum::SMTP_HOST_DEFAULT, 
+                                           $smtp_port = Email_config_enum::SMTP_PORT_DEFAULT, 
+                                           $mailtype = Email_config_enum::MAIL_TYPE_DEFAULT, 
+                                           $c_d = null, $u_d = null) {
         $data = array(
                       Email_config_enum::EMAIL_SEND => $email_send,
                       Email_config_enum::PASSWORD => $password,
+                      Email_config_enum::PROTOCOL => $protocol,
+                      Email_config_enum::SMTP_HOST => $smtp_host,
+                      Email_config_enum::SMTP_PORT => $smtp_port,
+                      Email_config_enum::MAIL_TYPE => $mailtype,
                       Email_config_enum::CREATED_DATE => ($c_d == null)? $this->current_date : $c_d,
                       Email_config_enum::UPDATED_DATE => ($u_d == null)? $this->current_date : $u_d
         );
@@ -310,10 +327,20 @@ class Apis extends CI_Model{
      * @param String $c_d
      * @param String $u_d
      */
-    public function editTableEmailConfig($id, $email_send, $password, $c_d = null, $u_d = null) {
+    public function editTableEmailConfig(   $id, 
+                                            $email_send, $password, 
+                                            $protocol = Email_config_enum::PROTOCOL_DEFAULT, 
+                                            $smtp_host = Email_config_enum::SMTP_HOST_DEFAULT, 
+                                            $smtp_port = Email_config_enum::SMTP_PORT_DEFAULT, 
+                                            $mailtype = Email_config_enum::MAIL_TYPE_DEFAULT, 
+                                            $c_d = null, $u_d = null) {
         $data = array(
                       Email_config_enum::EMAIL_SEND => $email_send,
                       Email_config_enum::PASSWORD => $password,
+                      Email_config_enum::PROTOCOL => $protocol,
+                      Email_config_enum::SMTP_HOST => $smtp_host,
+                      Email_config_enum::SMTP_PORT => $smtp_port,
+                      Email_config_enum::MAIL_TYPE => $mailtype,
 //                      Email_config_enum::CREATED_DATE => ($c_d == null)? $this->current_date : $c_d,
                       Email_config_enum::UPDATED_DATE => ($u_d == null)? $this->current_date : $u_d
         );
@@ -555,16 +582,19 @@ class Apis extends CI_Model{
         }
     }
     
-    function sendMail($from_mail=null, $pass=null, $full_name=null, $to_mail=null, $subject=null, $message=null){
+    function sendMail($protocol, $smtp_host, $smtp_port, $mailtype, 
+                      $from_mail=null, $pass=null, $full_name=null, 
+                      $to_mail=null, $subject=null, $message=null){
+        
         $TAG = 'sendMail';
         
         $config = array(
-            'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_port' => 465,
+            'protocol' => $protocol,
+            'smtp_host' => $smtp_host,
+            'smtp_port' => $smtp_port,
             'smtp_user' => $from_mail,
             'smtp_pass' => $pass,
-            'mailtype' => 'html'
+            'mailtype' => $mailtype
         );
  
         // load the email library that provided by CI
@@ -583,7 +613,7 @@ class Apis extends CI_Model{
              $this->setStatus(Common_enum::STATUS_CUCCESSFUL);
          }
          else{
-//             $this->setError($send->print_debugger());
+             $this->setError('Send to'.$to_mail.' fail');
             show_error($this->email->print_debugger());
          }
          

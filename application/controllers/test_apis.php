@@ -35,7 +35,7 @@ class Test_apis extends CI_Controller {
 //                
 //                $this->apis->deleteTableEmails(18);
                 
-//                $this->apis->insertTableEmailConfig('xxx@gmail.com', '123456789@');
+                $this->apis->insertTableEmailConfig('xxx@gmail.com', '123456789@');
 //        var_dump($this->apis->getTableEmailConfigById(3));
                 
 //                $this->apis->deleteTableEmailConfig(4);
