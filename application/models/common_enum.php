@@ -15,7 +15,7 @@ class Common_enum {
     
     const STATUS = 'status';
     const STATUS_ERROR = 'ERROR';
-    const STATUS_CUCCESSFUL = 'CUCCESSFUL';
+    const STATUS_SUCCESSFUL = 'SUCCESSFUL';
     const ACTION_INSERT = 'ACTION_INSERT';
     const ACTION_EDIT = 'ACTION_EDIT';
     const ACTION_DELETE = 'ACTION_DELETE';

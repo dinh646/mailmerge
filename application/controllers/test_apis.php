@@ -42,16 +42,16 @@ class Test_apis extends CI_Controller {
                 
 //                var_dump($this->apis->getTableEmailConfigById(6));
                 
-//                $this->apis->insertTableTemplates('Spring', 'bla bla...');
+                $this->apis->insertTableTemplates('Temple','Spring', 'bla bla...');
                 
 //                var_dump($this->apis->getTableTemplates());
 //                $this->apis->editTableTemplates(1, 'Edit ', 'Mrs', 'edit ', 'edit bla bla...');
                 
 //                $this->apis->deleteTableTemplates(1);
 //                    $this->apis->sendMail('xinhhuynh@innoria.com', 'Xinh1091646', 'Xinh Huynh', 'phule@innoria.com', 'Subject', 'Message...bla bla....');
-                var_dump($this->apis->sendListMail(6, 2, array(20), 'Ttt'));
+//                var_dump($this->apis->sendListMail(6, 2, array(20), 'Ttt'));
                 
-//                var_dump($this->apis->getError());
+                var_dump($this->apis->getError());
                 
 	}
 }
