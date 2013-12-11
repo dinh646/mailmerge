@@ -25,6 +25,7 @@ class Home_controller extends CI_Controller {
         $data['id_template']=$id;
         $data['list_template']=$this->apis->getTableTemplates();
         $data['status_active_menu']="send_mail";
+        $data['email_list']=$this->apis->getTableEmails();
         $data['email_config_list']=$this->apis->getTableEmailConfig();
         $this->load->view('templates/default/header/header.php');
         $this->load->view('templates/default/menu/menu.php',$data);
@@ -37,6 +38,7 @@ class Home_controller extends CI_Controller {
               $data['id_template']='default';
               $data['email_config_list']=$this->apis->getTableEmailConfig();
               $data['status_active_menu']="send_mail";
+              $data['email_list']=$this->apis->getTableEmails();
               $this->load->view('templates/default/header/header.php');
               $this->load->view('templates/default/menu/menu.php',$data);
               $this->load->view('templates/default/content/send_mail.php');
