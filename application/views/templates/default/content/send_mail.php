@@ -262,7 +262,7 @@
                           </li>
                           <li>
                             <div class="text">
-                              <div id="status_send_mail">
+                              <div id="status_send_mail_'.$id.'">
                               </div>
                             </div>
                           </li>
@@ -455,11 +455,16 @@
                       type: 'POST',
                       data:data,
                       success: function(data){
-                        //alert(data);
-                        if(data=="SUCCESSFUL"){
-                          var status="#status_send_mail_"+checkedValue;
-                          $(status).addClass('success');
-                        }
+                        alert(data);
+                       /* if(data=="SUCCESSFUL"){
+                            var status="#status_send_mail_"+checkedValue;
+                            $(status).addClass('success');
+                          }
+                          if(data=="ERROR"){
+                            var status="#status_send_mail_"+checkedValue;
+                            $(status).addClass('error');
+                          }
+                          */
                       },
                      error: function(a,textStatus,b){
                        alert('khong thanh cong');
