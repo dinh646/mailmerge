@@ -58,17 +58,15 @@
 
     </div>
    
-  <div class="input_items">
-          <div class="keyvalueeditor-row" data-orther="1">
-<!--            <input id="param_email" type="text" class="keyvalueeditor-key keyvalueeditor_check_status" placeholder="Email"  name="keyvalueeditor-action" value="">-->
-            <input id="param_subject" type="text" class="keyvalueeditor-key keyvalueeditor_check_status" placeholder="Tiêu đề"  name="keyvalueeditor-action" value="">
-<!--            <input id="btn_list_mail" type="submit" class="keyvalueeditor-key keyvalueeditor_check_status"   name="keyvalueeditor-action" value="Gửi nhi�?u ngư�?i">-->
-          </div>
-        
-<!--          <input type="submit" value="Them" id="btn_add_email">-->
+    <div class="title_content_mail"><span>Tiêu đề mail</span></div>
+    <div class="subject_mail"><span>
+      <?php 
+      if(!empty($subject_mail)){
+        echo $subject_mail;
+      }
           
-          
-    </div>
+      ?>
+      </span></div>
     <div class="title_content_mail"><span>Nội dung mail</span></div>
     <div class="editor_form">
 <!--      <script src="<?php //echo $url;?>templates/default/plugins/ckeditor/ckeditor.js"></script>
@@ -118,18 +116,34 @@
       
       
     </div>
+   <div class="tabs">
+      <ul>
+        <li>
+          <div class="text">
+            <input value="status" name="send_all_mail" type="radio" onClick="send_all_mail(this)" id="send_all_mail" ><span>Gửi mail đến tất cả</span>
+          </div>
+        </li>
+        <li >
+          <div class="text">
+            <input type="radio" name="option_send_mail" onClick="option_send_mail(this)" id="option_send_mail"><span>Tùy chọn gửi mail</span>
+          </div>
+        </li>
+      </ul>
+   </div>
     
+    
+ <div id="disable"> 
     <div class="list_mail_to">
       <span>Danh sánh mail nhận</span>
     </div>
     <div class="table_list_email_to">
        <ul class="title_email_list">
-          <li>
+          <li class="chose_email">
             <div class="text">
               <span>chọn email</span>
             </div>
           </li>
-          <li>
+          <li class="li_email">
             <div class="text">
               <span>Email</span>
             </div>
@@ -142,6 +156,11 @@
           <li>
             <div class="text">
               <span>Xưng danh</span>
+            </div>
+          </li>
+          <li>
+            <div class="text">
+              <span>Status</span>
             </div>
           </li>
           
@@ -157,7 +176,7 @@
                       <input value="status" name="check_all" type="checkbox" onClick="toggle(this)" id="check_all" ><span>Chọn tất cả</span>
                     </div>
                   </li>
-                  <li>
+                  <li >
                     <div class="text">
                       <input type="checkbox" name="invert_check" onClick="invert(this)"><span>Đảo vùng chọn</span>
                     </div>
@@ -187,12 +206,12 @@
                   echo  '
                         <ul class="blue">
                        
-                         <li>
+                         <li class="chose_email">
                             <div class="text">
                               <input onClick="toggle_item(this)" type="checkbox" name="list_mail_check" class="list_mail_check" value="'.$id.'">
                             </div>
                           </li>
-                          <li>
+                          <li class="li_email">
                             <div class="text">
                               <span>'.$email.'</span>
                             </div>
@@ -207,7 +226,12 @@
                               <span>'.$titles_names.'</span>
                             </div>
                           </li>
-              
+                           <li>
+                            <div class="text">
+                              <div id="status_send_mail" class="error">
+                              </div>
+                            </div>
+                          </li>
                         </ul>';
                   
                 }
@@ -216,12 +240,12 @@
                   echo  '
                         <ul>
                
-                         <li>
+                         <li class="chose_email">
                             <div class="text">
                               <input onClick="toggle_item(this)" type="checkbox" name="list_mail_check" class="list_mail_check" value="'.$id.'">
                             </div>
                           </li>
-                          <li>
+                          <li class="li_email">
                             <div class="text">
                               <span>'.$email.'</span>
                             </div>
@@ -236,7 +260,12 @@
                               <span>'.$titles_names.'</span>
                             </div>
                           </li>
-                        
+                          <li>
+                            <div class="text">
+                              <div id="status_send_mail">
+                              </div>
+                            </div>
+                          </li>
                         </ul>';
                   
                   
@@ -252,6 +281,11 @@
         
         ?>
     </div>
+   
+ </div>
+    
+    
+    
     <div class="btn_save">
         <input id="btn_send_mail" type="submit" class="keyvalueeditor-key"  value="Send">
     </div>
@@ -266,7 +300,13 @@
 <input type="hidden" value="<?php echo $id_template;?>" id="id_template">
 
 <script>
-  
+ 
+ $(document).ready(function() {
+     $("#disable").css({
+       display: "none"
+     });
+ });
+   
    function displayResult(selTag)
     {
       var x=selTag.options[selTag.selectedIndex].text;
@@ -317,11 +357,135 @@
          }
        }
     
-  
+   function send_all_mail(source) {
+      var checkboxes = document.getElementsByName('option_send_mail');
+      for(var i=0, n=checkboxes.length;i<n;i++) {
+        checkboxes[i].checked = false;
+      }
+       $("#disable").css({
+         display: "none"
+       });
+      
+      
+   }
+    function option_send_mail(source) {
+      var checkboxes = document.getElementsByName('send_all_mail');
+      for(var i=0, n=checkboxes.length;i<n;i++) {
+        checkboxes[i].checked = false;
+      }
+       $("#disable").css({
+       display: "block"
+       });
+      
+      
+      
+   }
+   
+   
    
   $('#btn_send_mail').click(function (){
-       
-       var param_subject = $('#param_subject').val();
+    var id_template=$('#id_template').val();
+    var id_mail_form=$('.info_send_mail').val();
+    
+    var send_all_mail = document.getElementsByName('send_all_mail');
+    var option_send_mail = document.getElementsByName('option_send_mail');
+    
+    
+   //check error param
+    var error="";
+    if(id_template=="default"){
+      error=error+"bạn chưa chọn template!\n\
+       ";
+    }
+    if(send_all_mail[0].checked==false && option_send_mail[0].checked==false){
+      
+      error=error+'bạn chưa chọn mail để gửi!';
+    }
+    
+    
+    if(error!=""){
+      alert(error);
+    }
+    
+    //start send mail------
+    if(error==""){
+      
+        //if send all mail=======================================================
+        var send_all_mail = document.getElementsByName('send_all_mail');
+        if(send_all_mail[0].checked==true){
+           $("#disable_screen").addClass("active");
+           var data={
+                  id_template:id_template,
+                  id_mail_form:id_mail_form,
+                  status:"send_all"
+            }
+           var url_api = $('#hidUrl').val()+'index.php/home_controller/send_all_mail';
+            $.ajax({
+             url: url_api ,
+             type: 'POST',
+             data:data,
+             success: function(data){
+               //alert(data);
+               $("#disable_screen").removeClass("active");
+             },
+            error: function(a,textStatus,b){
+              alert('khong thanh cong');
+            }
+          });
+         }
+
+        //if option send mail======================================================
+        var option_send_mail = document.getElementsByName('option_send_mail');
+        if(option_send_mail[0].checked==true){
+           //list mail to
+            var checkedValue; 
+            var inputElements = $('input:checkbox[name="list_mail_check"]:checked');
+            var url_api = $('#hidUrl').val()+'index.php/home_controller/send_mail';
+           
+            //vong lap for send one email
+            for(var i=0; inputElements[i]; ++i){
+                 checkedValue=inputElements[i].value;                
+                 var data={
+                    id_template:id_template,
+                    id_mail_form:id_mail_form,
+                    mail_to:checkedValue
+                  }
+                   $.ajax({
+                      url: url_api ,
+                      type: 'POST',
+                      data:data,
+                      success: function(data){
+                        //alert(data);
+                        if(data=="SUCCESSFUL"){
+                          var status="#status_send_mail_"+checkedValue;
+                          $(status).addClass('success');
+                        }
+                      },
+                     error: function(a,textStatus,b){
+                       alert('khong thanh cong');
+                     }
+                   });
+                   
+                   
+                   
+            }
+             
+               
+               
+          }
+
+    }
+    //end if error
+    
+    function strcmp (str1, str2) {
+      return ((str1 == str2) ? 0 : ((str1 > str2) ? 1 : -1));
+    }
+    
+    
+    
+    
+    
+   /*    $("#disable_screen").addClass("active");
        var id_template=$('#id_template').val();
        var id_mail_form=$('.info_send_mail').val();
       // var list_mail_to=$('#id_s').val();
@@ -354,8 +518,7 @@
                checkall:'+checkall
                );*/
        
-         var data={
-                subject:param_subject,
+     /*    var data={
                 id_template:id_template,
                 id_mail_form:id_mail_form,
                 list_mail_to:checkedValue ,
@@ -379,7 +542,12 @@
          error: function(a,textStatus,b){
            alert('khong thanh cong');
          }
-       });
+       });*/
   });
 </script>
 
+<div id="disable_screen">
+  <div class="img_load_send">
+    
+  </div>
+</div>

@@ -10,8 +10,8 @@
       <div class="info_add_email">
           
           <div class="keyvalueeditor-row" data-orther="1">
-            <input id="param_template_name" type="text" class="keyvalueeditor-key keyvalueeditor_check_status" placeholder="Template name"  name="keyvalueeditor-action" value="">
-            
+            <input id="param_template_name" type="text" class="keyvalueeditor-key keyvalueeditor_check_status" placeholder="Tên template"  name="keyvalueeditor-action" value="">
+            <input id="param_subject" type="text" class="keyvalueeditor-key keyvalueeditor_check_status" placeholder="Tiêu đề"  name="keyvalueeditor-action" value="">
           </div>
         
         <!--  <input type="submit" value="Them" id="btn_add_email">-->
@@ -82,6 +82,7 @@
 <script>
   $('#btn_add_template').click(function (){
     var param_template_name = $('#param_template_name').val();
+    var param_subject=$('#param_subject').val();
     //noi dung bai viet=======================================================>
        var content_ckeditor=CKEDITOR.instances.editor1.getData();//nội dung chi tiết bài viết
           $('#trackingDiv').html(content_ckeditor);
@@ -133,7 +134,8 @@
                 
                 name : param_template_name,
                 content :    content, 
-                string_image_filter : string_image_filter
+                string_image_filter : string_image_filter,
+                param_subject:param_subject
           }
         
     var url_api = $('#hidUrl').val()+'index.php/home_controller/add_template'
