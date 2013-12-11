@@ -18,9 +18,9 @@ class Test_apis extends CI_Controller {
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
 	public function __construct() {
-        parent::__construct();
-        $this->load->model('apis');
-    }
+            parent::__construct();
+            $this->load->model('apis');
+        }
     
 	public function index(){
 		//$this->load->view('welcome_message');
@@ -35,22 +35,23 @@ class Test_apis extends CI_Controller {
 //                
 //                $this->apis->deleteTableEmails(18);
                 
-                $this->apis->insertTableEmailConfig('xxx@gmail.com', '123456789@');
+//                $this->apis->insertTableEmailConfig('xxx@gmail.com', '123456789@');
 //        var_dump($this->apis->getTableEmailConfigById(3));
                 
 //                $this->apis->deleteTableEmailConfig(4);
                 
-//                var_dump($this->apis->getTableEmailConfig());
+//                var_dump($this->apis->getTableEmailConfigById(6));
                 
-                $this->apis->insertTableTemplates('Spring', 'bla bla...');
+//                $this->apis->insertTableTemplates('Spring', 'bla bla...');
                 
 //                var_dump($this->apis->getTableTemplates());
 //                $this->apis->editTableTemplates(1, 'Edit ', 'Mrs', 'edit ', 'edit bla bla...');
                 
 //                $this->apis->deleteTableTemplates(1);
 //                    $this->apis->sendMail('xinhhuynh@innoria.com', 'Xinh1091646', 'Xinh Huynh', 'phule@innoria.com', 'Subject', 'Message...bla bla....');
+                var_dump($this->apis->sendListMail(6, 2, array(20), 'Ttt'));
                 
-                var_dump($this->apis->getError());
+//                var_dump($this->apis->getError());
                 
 	}
 }

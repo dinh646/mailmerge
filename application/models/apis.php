@@ -90,26 +90,17 @@ class Apis extends CI_Model{
      * @return Array
      */
     public function getTableEmailsById($id) {
-        
         $this->load->database();
-        $results = array();
-        
         $select_all = $this->db->get_where(Emails_enum::TABLE_NAME, array(Emails_enum::ID => $id))->result();
-        foreach ($select_all as $value) {
-           
-            $row = array(
-                         Emails_enum::ID => $value->id,
-                         Emails_enum::EMAIL => $value->email,
-                         Emails_enum::TITLES_NAMES => $value->titles_names,
-                         Emails_enum::FULL_NAME => $value->full_name,
-                         Emails_enum::CREATED_DATE => $value->created_date,
-                         Emails_enum::UPDATED_DATE => $value->updated_date,
-            );
-            
-            $results[]=$row;
-        }
-        
-        return $results;
+        $row = array(
+                     Emails_enum::ID => $select_all[0]->id,
+                     Emails_enum::EMAIL => $select_all[0]->email,
+                     Emails_enum::TITLES_NAMES => $select_all[0]->titles_names,
+                     Emails_enum::FULL_NAME => $select_all[0]->full_name,
+                     Emails_enum::CREATED_DATE => $select_all[0]->created_date,
+                     Emails_enum::UPDATED_DATE => $select_all[0]->updated_date,
+        );
+        return $row;
     }
     
     /**
@@ -581,7 +572,13 @@ class Apis extends CI_Model{
             return;
         }
     }
-    
+    //
+    //  id mail_config
+    //
+    //  id templates
+    //
+    //  list mail to
+    //
     function sendMail($protocol, $smtp_host, $smtp_port, $mailtype, 
                       $from_mail=null, $pass=null, $full_name=null, 
                       $to_mail=null, $subject=null, $message=null){
@@ -614,13 +611,108 @@ class Apis extends CI_Model{
          }
          else{
              $this->setError('Send to'.$to_mail.' fail');
-            show_error($this->email->print_debugger());
+             
          }
-         
          $this->insertTableLogs(Common_enum::ACTION_SEND, $TAG, $this->getError(), $this->getStatus(), $this->current_date, $this->current_date);
-
     }
 
+    public function sendListMail($id_mail_config, $id_template, $list_id_mail, $subject, $send_all = null) {
+        
+        $temp_mail_cofig = $this->getTableEmailConfigById($id_mail_config);
+        $temp_template = $this->getTableTemplatesById($id_template);
 
+        $list_mail_send = array();
+        
+        if( (is_array($list_id_mail)) && 
+            (is_array($temp_mail_cofig) && sizeof($temp_mail_cofig)) && 
+            (is_array($temp_template) && sizeof($temp_template)) 
+            ){
+
+            //
+            //  Get list mail from list_id_mail
+            //
+            $list_mail = array();
+            if($send_all == null){
+                foreach ($list_id_mail as $id_mail) {
+                    $list_mail[] = $this->getTableEmailsById($id_mail);
+                }
+            }
+            else{
+                $list_mail = $this->getTableEmails();
+            }
+            
+            //
+            //  Load mail config
+            //
+            $mail_cofig = $temp_mail_cofig[0];
+            $protocol = $mail_cofig['protocol'];
+            $smtp_host = $mail_cofig['smtp_host'];
+            $smtp_port = $mail_cofig['smtp_port'];
+            $from_mail = $mail_cofig['email_send'];
+            $pass = $mail_cofig['password'];
+            $mailtype = $mail_cofig['mailtype'];
+
+            $config = array(
+                'protocol' => $protocol,
+                'smtp_host' => $smtp_host,
+                'smtp_port' => $smtp_port,
+                'smtp_user' => $from_mail,
+                'smtp_pass' => $pass,
+                'mailtype' => $mailtype
+            );
+            
+            //
+            //  Load mail template
+            //
+            $template = $temp_template[0];
+//            $name_template = $template['name'];
+            $content = $template['content'];
+
+
+            // load the email library that provided by CI
+            $this->load->library('email', $config);
+
+            foreach ($list_mail as $mail) {
+
+                $mail_address = $mail['email'];
+                $titles_name = $mail['titles_names'];
+                $full_name = $mail['full_name'];
+                
+                $message_replace_full_name = str_replace(Common_enum::MASK_FULL_NAME, $full_name, $content);
+                $message_replace_titles_names = str_replace(Common_enum::MASK_TITLES_NAMES, $titles_name, $message_replace_full_name);
+                $message_replace_email = str_replace(Common_enum::MASK_EMAIL, $mail_address, $message_replace_titles_names);
+                
+                // this will bind your attributes to email library
+                $this->email->set_newline("\r\n");
+
+                $this->email->from($from_mail/*, $full_name*/);
+                $this->email->to($mail_address);
+                $this->email->subject($subject);
+                $this->email->message($message_replace_email);
+
+                // send your email. if it produce an error it will print 'Fail to send your message!' for you
+                $send = $this->email->send();
+                
+                if($send){
+                    $mail_send = array(
+                        Emails_enum::EMAIL => $mail_address,
+                        Common_enum::STATUS => Common_enum::STATUS_CUCCESSFUL
+                    );
+                    $list_mail_send[] = $mail_send;
+                }
+                else{
+                    $mail_send = array(
+                        Emails_enum::EMAIL => $mail_address,
+                        Common_enum::STATUS => Common_enum::STATUS_ERROR
+                    );
+                    $list_mail_send[] = $mail_send;
+                }
+            }
+        }
+        else{
+            $this->setError('Can\'t load mail config or template or get list mail to');
+        }
+        return $list_mail_send;
+    }
     
 }

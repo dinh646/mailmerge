@@ -13,6 +13,7 @@
  */
 class Common_enum {
     
+    const STATUS = 'status';
     const STATUS_ERROR = 'ERROR';
     const STATUS_CUCCESSFUL = 'CUCCESSFUL';
     const ACTION_INSERT = 'ACTION_INSERT';
@@ -20,5 +21,9 @@ class Common_enum {
     const ACTION_DELETE = 'ACTION_DELETE';
     const ACTION_SEND = 'ACTION_SEND';
     const DATE_FORMAT_d_m_Y_H_i_s = 'd-m-Y H:i:s';
+    const MASK_No = 3;
+    const MASK_FULL_NAME = '[Full_Name]';
+    const MASK_TITLES_NAMES = '[Titles_Names]';
+    const MASK_EMAIL = '[Email]';
     
 }
