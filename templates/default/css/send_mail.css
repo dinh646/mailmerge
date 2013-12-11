@@ -53,13 +53,53 @@
   width: 800px;
   height: auto;
   margin-left: 50px;
+  border: 1px solid #ddd;
 }
-
-#container_main #form_content_mail .page_center .img_form{
+#container_main #form_content_mail .page_center .title_content_mail{
   width: 800px;
   height: auto;
   margin-left: 50px;
 }
+#container_main #form_content_mail .page_center .title_content_mail span{
+  font-size: 15px;
+  font-weight: bold;
+  color: #999;
+  font-family: sans-serif;
+}
+
+#container_main #form_content_mail .page_center .title_mail_config{
+  width: 800px;
+  height: auto;
+  margin-left: 50px;
+  margin-top: 50px;
+}
+#container_main #form_content_mail .page_center .title_mail_config span{
+  font-size: 15px;
+  font-weight: bold;
+  color: #999;
+  font-family: sans-serif;
+}
+#container_main #form_content_mail .page_center .list_mail_to{
+  width: 800px;
+  height: auto;
+  margin-left: 50px;
+  margin-top: 50px;
+}
+#container_main #form_content_mail .page_center .list_mail_to span{
+  font-size: 15px;
+  font-weight: bold;
+  color: #999;
+  font-family: sans-serif;
+}
+
+
+
+#container_main #form_content_mail .page_center .img_form{
+  width: 200px;
+  height: auto;
+  margin-left: 50px;
+}
+
 
 #container_main #form_content_mail .page_center .img_form ul{
   width: 800px;
@@ -92,6 +132,52 @@
   margin-left: 50px;
   
 }
+
+#container_main #form_content_mail .page_center .table_list_email_to{
+  width: 800px;
+  height: auto;
+  margin: 0 auto;
+  margin-left: 50px;
+  border: 1px solid #ddd;
+  float: left;
+}
+#container_main #form_content_mail .page_center .table_list_email_to .ul_check_all span{
+  font-size: 14px;
+  color: #999;
+  font-family: sans-serif;
+  font-style: italic;
+}
+
+#container_main #form_content_mail .page_center .table_list_email_to ul{
+  width: 800px;
+  height: auto;
+  margin: 0 auto;
+  list-style: none;
+  float: left;
+}
+
+#container_main #form_content_mail .page_center .table_list_email_to ul.blue{
+  width: 800px;
+  height: auto;
+  margin: 0 auto;
+  list-style: none;
+  float: left;
+  background: #eee;
+}
+
+#container_main #form_content_mail .page_center .table_list_email_to ul li{
+  width: 190px;
+  height: 50px;
+  float: left;
+  margin-left: 10px;
+}
+#container_main #form_content_mail .page_center .table_list_email_to ul li .text{
+  margin-top: 18px;
+}
+
+
+
+
 
 
 select, input[type="text"] .uneditable-input {
