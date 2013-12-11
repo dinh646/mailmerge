@@ -440,6 +440,7 @@ class Apis extends CI_Model{
         foreach ($select_all as $value) {
             $row = array(
                          Templates_enum::ID => $value->id,
+                         Templates_enum::SUBJECT => $value->subject,
                          Templates_enum::NAME => $value->name,
                          Templates_enum::CONTENT => $value->content,
                          Templates_enum::CREATED_DATE => $value->created_date,
@@ -465,6 +466,7 @@ class Apis extends CI_Model{
         foreach ($select_all as $value) {
             $row = array(
                          Templates_enum::ID => $value->id,
+                         Templates_enum::SUBJECT => $value->subject,
                          Templates_enum::NAME => $value->name,
                          Templates_enum::CONTENT => $value->content,
                          Templates_enum::CREATED_DATE => $value->created_date,
@@ -485,8 +487,9 @@ class Apis extends CI_Model{
      * @param String $c_d
      * @param String $u_d
      */
-    public function insertTableTemplates($name, $content, $c_d = null, $u_d = null) {
+    public function insertTableTemplates($subject, $name, $content, $c_d = null, $u_d = null) {
         $data = array(
+                      Templates_enum::SUBJECT => $subject,
                       Templates_enum::NAME => $name,
                       Templates_enum::CONTENT => $content,
                       Templates_enum::CREATED_DATE => ($c_d == null)? $this->current_date : $c_d,
@@ -520,9 +523,10 @@ class Apis extends CI_Model{
      * @param String $c_d
      * @param String $u_d
      */
-    public function editTableTemplates($id, $name, $content, $c_d = null, $u_d = null) {
+    public function editTableTemplates($id, $subject, $name, $content, $c_d = null, $u_d = null) {
         $data = array(
-                      Templates_enum::FULL_NAME => $name,
+                      Templates_enum::SUBJECT => $subject,
+                      Templates_enum::NAME => $name,
                       Templates_enum::CONTENT => $content,
 //                      Email_config_enum::CREATED_DATE => ($c_d == null)? $this->current_date : $c_d,
                       Templates_enum::UPDATED_DATE => ($u_d == null)? $this->current_date : $u_d
@@ -616,7 +620,7 @@ class Apis extends CI_Model{
          $this->insertTableLogs(Common_enum::ACTION_SEND, $TAG, $this->getError(), $this->getStatus(), $this->current_date, $this->current_date);
     }
 
-    public function sendListMail($id_mail_config, $id_template, $list_id_mail, $subject, $send_all = null) {
+    public function sendListMail($id_mail_config, $id_template, $list_id_mail, $send_all = null) {
         $TAG = '';
         
         $temp_mail_cofig = $this->getTableEmailConfigById($id_mail_config);
@@ -666,7 +670,7 @@ class Apis extends CI_Model{
             //  Load mail template
             //
             $template = $temp_template[0];
-//            $name_template = $template['name'];
+            $subject = $template['subject'];
             $content = html_entity_decode($template['content']);
 
 

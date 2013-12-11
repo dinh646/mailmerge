@@ -14,6 +14,7 @@
 class Templates_enum {
     const  ID = 'id';
     const NAME = 'name';
+    const SUBJECT = 'subject';
     const CONTENT = 'content';
     const CREATED_DATE = 'created_date';
     const UPDATED_DATE = 'updated_date';
