@@ -611,7 +611,7 @@ class Apis extends CI_Model{
         $send = $this->email->send();
         
          if($send){
-             $this->setStatus(Common_enum::STATUS_CUCCESSFUL);
+             $this->setStatus(Common_enum::STATUS_SUCCESSFUL);
          }
          else{
              $this->setError('Send to'.$to_mail.' fail');
@@ -701,7 +701,7 @@ class Apis extends CI_Model{
                 if($send){
                     $mail_send = array(
                         Emails_enum::EMAIL => $mail_address,
-                        Common_enum::STATUS => Common_enum::STATUS_CUCCESSFUL
+                        Common_enum::STATUS => Common_enum::STATUS_SUCCESSFUL
                     );
                     $list_mail_send[] = $mail_send;
                 }
