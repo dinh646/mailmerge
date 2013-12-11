@@ -617,6 +617,7 @@ class Apis extends CI_Model{
     }
 
     public function sendListMail($id_mail_config, $id_template, $list_id_mail, $subject, $send_all = null) {
+        $TAG = '';
         
         $temp_mail_cofig = $this->getTableEmailConfigById($id_mail_config);
         $temp_template = $this->getTableTemplatesById($id_template);
@@ -666,7 +667,7 @@ class Apis extends CI_Model{
             //
             $template = $temp_template[0];
 //            $name_template = $template['name'];
-            $content = $template['content'];
+            $content = html_entity_decode($template['content']);
 
 
             // load the email library that provided by CI
@@ -707,6 +708,8 @@ class Apis extends CI_Model{
                     );
                     $list_mail_send[] = $mail_send;
                 }
+                //  Write to logs
+                $this->insertTableLogs(Common_enum::ACTION_SEND, $TAG, $this->getError(), $this->getStatus(), $this->current_date, $this->current_date);
             }
         }
         else{
