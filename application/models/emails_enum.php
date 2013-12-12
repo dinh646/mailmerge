@@ -20,5 +20,5 @@ class Emails_enum {
     const UPDATED_DATE = 'updated_date';
     
     //  More
-    const TABLE_NAME = 'emails';
+    const TABLE_NAME = '_emails';
 }

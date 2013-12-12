@@ -33,23 +33,21 @@ class Test_apis extends CI_Controller {
                 
 //                $this->apis->editTableEmails(19, 'dsf@gmail.com', 'Mr', 'Edit');
 //                
-//                $this->apis->deleteTableEmails(18);
+//                $this->apis->deleteTableEmails(19);
                 
 //                $this->apis->insertTableEmailConfig('xxx@gmail.com', '123456789@');
-//        var_dump($this->apis->getTableEmailConfigById(3));
+//        var_dump($this->apis->getTableEmailConfigById(6));
                 
-//                $this->apis->deleteTableEmailConfig(4);
+//                $this->apis->deleteTableEmailConfig(7);
                 
-//                var_dump($this->apis->getTableEmailConfigById(6));
-                
-                $this->apis->insertTableTemplates('Temple','Spring', 'bla bla...');
+//                $this->apis->insertTableTemplates('Temple','Spring', 'bla bla...');
                 
 //                var_dump($this->apis->getTableTemplates());
-//                $this->apis->editTableTemplates(1, 'Edit ', 'Mrs', 'edit ', 'edit bla bla...');
+//                $this->apis->editTableTemplates(2, 'Edit ', 'Mrs', 'edit ', 'edit bla bla...');
                 
-//                $this->apis->deleteTableTemplates(1);
-//                    $this->apis->sendMail('xinhhuynh@innoria.com', 'Xinh1091646', 'Xinh Huynh', 'phule@innoria.com', 'Subject', 'Message...bla bla....');
-//                var_dump($this->apis->sendListMail(6, 2, array(20), 'Ttt'));
+//                $this->apis->deleteTableTemplates(2);
+//                    $this->apis->sendMail('xinhhuynh@innoria.com', 'Xinh1091646', 'Xinh Huynh', 'xinhhuynh@innoria.com', 'Subject', 'Message...bla bla....');
+                var_dump($this->apis->sendListMail(6, 3, array(20)));
                 
                 var_dump($this->apis->getError());
                 
