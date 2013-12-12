@@ -25,9 +25,9 @@ class Test_apis extends CI_Controller {
 	public function index(){
 		//$this->load->view('welcome_message');
 //                $get_data_table_emails = $this->apis->getTableEmails();
-//                
+////                
 //                    var_dump($get_data_table_emails);
-                $this->apis->insertTableEmails('xinhhuynh@innoria.com', 'Mr', 'Huynh Xinh');
+//                $this->apis->insertTableEmails('testdatabse@innoria.com', 'Mr', 'Huynh Xinh');
 //                
 //                var_dump($this->apis->getError());
                 
@@ -36,7 +36,7 @@ class Test_apis extends CI_Controller {
 //                $this->apis->deleteTableEmails(19);
                 
 //                $this->apis->insertTableEmailConfig('xxx@gmail.com', '123456789@');
-//        var_dump($this->apis->getTableEmailConfigById(6));
+//        var_dump($this->apis->getTableEmailConfig());
                 
 //                $this->apis->deleteTableEmailConfig(7);
                 
@@ -47,7 +47,8 @@ class Test_apis extends CI_Controller {
                 
 //                $this->apis->deleteTableTemplates(2);
 //                    $this->apis->sendMail('xinhhuynh@innoria.com', 'Xinh1091646', 'Xinh Huynh', 'xinhhuynh@innoria.com', 'Subject', 'Message...bla bla....');
-//                var_dump($this->apis->sendListMail(6, 3, array(20)));
+//                echo "hwllo";
+//                var_dump($this->apis->sendListMail(8, 3, array(20)));
                 
                 var_dump($this->apis->getError());
                 

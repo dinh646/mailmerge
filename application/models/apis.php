@@ -22,6 +22,7 @@ class Apis extends CI_Model{
         $this->load->model('logs_enum');
         $this->load->model('emails_enum');
         $this->load->model('templates_enum');
+        $this->load->model('common_enum');
         $this->load->model('common_model');
         
         $this->current_date = $this->common_model->getCurrentDate(Common_enum::DATE_FORMAT_d_m_Y_H_i_s);
@@ -33,12 +34,78 @@ class Apis extends CI_Model{
         $this->STATUS = '';
         
         //  Init Database
-        $this->connect = $this->load->database();
-//        if(!$this->connect){
-//            $this->ERROR = 'Connect database fail.';
-////            return;
-//        }
+        $this->load->dbutil();
+
+        //  Check if db not exist
+        $check_db = $this->dbutil->database_exists('mailmerge');
         
+        if($check_db){
+            $this->load->dbforge();
+            
+            //  Connect to DB
+            $this->connect = $this->load->database();
+            
+//            //-- --------------------------------------
+//            //-- Table structure for `mailmerge_emails`
+//            //-- --------------------------------------
+//            if( !($this->db->table_exists(Emails_enum::TABLE_NAME)) ){
+//                $feilds_tb_mailmerge_emails = array(
+//                    Emails_enum::ID => array(Common_enum::TYPE => Common_enum::INT,
+//                                             Common_enum::CONSTRAINT => Common_enum::DEFAULT_CONSTRAINT_INT_VALUE,
+//                                             Common_enum::AUTO_INCREMENT => Common_enum::DEFAULT_AUTO_INCREMENT_VALUE
+//                                             ),
+//                    Emails_enum::EMAIL => array(
+//                                             Common_enum::TYPE => Common_enum::TEXT,
+//                                             Common_enum::CONSTRAINT => Common_enum::DEFAULT_CONSTRAINT_EMAIL_VALUE,
+//                                             Common_enum::COLLATION => Common_enum::DEFAULT_COLLATION_VALUE
+//                                            ),
+//                    Emails_enum::TITLES_NAMES => array(
+//                                             Common_enum::TYPE => Common_enum::TEXT,
+//                                             Common_enum::CONSTRAINT => Common_enum::DEFAULT_CONSTRAINT_TITLES_NAMES_VALUE,
+//                                             Common_enum::COLLATION => Common_enum::DEFAULT_COLLATION_VALUE
+//                                             ),
+//
+//                    Emails_enum::FULL_NAME => array(
+//                                             Common_enum::TYPE => Common_enum::TEXT,
+//                                             Common_enum::CONSTRAINT => Common_enum::DEFAULT_CONSTRAINT_FULL_NAME_VALUE,
+//                                             Common_enum::COLLATION => Common_enum::DEFAULT_COLLATION_VALUE
+//                                             ),
+//                    Emails_enum::CREATED_DATE => array(
+//                                             Common_enum::TYPE => Common_enum::VARCHAR,
+//                                             Common_enum::CONSTRAINT => Common_enum::DEFAULT_CONSTRAINT_DATE_VALUE,
+//                                             Common_enum::COLLATION => Common_enum::DEFAULT_COLLATION_VALUE
+//                                             ),
+//                    Emails_enum::UPDATED_DATE => array(
+//                                             Common_enum::TYPE => Common_enum::VARCHAR,
+//                                             Common_enum::CONSTRAINT => Common_enum::DEFAULT_CONSTRAINT_DATE_VALUE,
+//                                             Common_enum::COLLATION => Common_enum::DEFAULT_COLLATION_VALUE
+//                                             ),
+//
+//                );
+//                $this->dbforge->add_field($feilds_tb_mailmerge_emails);
+//                $this->dbforge->add_key(Emails_enum::ID, TRUE);
+//                $create_table = $this->dbforge->create_table(Emails_enum::TABLE_NAME);
+//                
+//                $this->ERROR = $create_table;
+//            }
+            
+            //-- ------------------------------------
+            //-- Table structure for `mailmerge_logs`
+            //-- ------------------------------------
+            
+            //-- ----------------------------
+            //-- Table structure for `mailmerge_templates`
+            //-- ----------------------------
+            
+            //-- ----------------------------
+            //-- Records of mailmerge_templates
+            //-- ----------------------------
+        }
+        else{
+            //
+            //  TODO - Create database
+            //
+        }
     }
     
     public function setError($e) {
@@ -681,48 +748,50 @@ class Apis extends CI_Model{
             $template = $temp_template[0];
             $subject = $template['subject'];
             $content = html_entity_decode($template['content']);
+            try{
+                // load the email library that provided by CI
+                $this->load->library('email', $config);
+                $this->setError($this->email->get_error());
+                foreach ($list_mail as $mail) {
 
+                    $mail_address = $mail['email'];
+                    $titles_name = $mail['titles_names'];
+                    $full_name = $mail['full_name'];
 
-            // load the email library that provided by CI
-            $this->load->library('email', $config);
+                    $message_replace_full_name = str_replace(Common_enum::MASK_FULL_NAME, $full_name, $content);
+                    $message_replace_titles_names = str_replace(Common_enum::MASK_TITLES_NAMES, $titles_name, $message_replace_full_name);
+                    $message_replace_email = str_replace(Common_enum::MASK_EMAIL, $mail_address, $message_replace_titles_names);
 
-            foreach ($list_mail as $mail) {
+                    // this will bind your attributes to email library
+                    $this->email->set_newline("\r\n");
 
-                $mail_address = $mail['email'];
-                $titles_name = $mail['titles_names'];
-                $full_name = $mail['full_name'];
-                
-                $message_replace_full_name = str_replace(Common_enum::MASK_FULL_NAME, $full_name, $content);
-                $message_replace_titles_names = str_replace(Common_enum::MASK_TITLES_NAMES, $titles_name, $message_replace_full_name);
-                $message_replace_email = str_replace(Common_enum::MASK_EMAIL, $mail_address, $message_replace_titles_names);
-                
-                // this will bind your attributes to email library
-                $this->email->set_newline("\r\n");
+                    $this->email->from($from_mail/*, $full_name*/);
+                    $this->email->to($mail_address);
+                    $this->email->subject($subject);
+                    $this->email->message($message_replace_email);
 
-                $this->email->from($from_mail/*, $full_name*/);
-                $this->email->to($mail_address);
-                $this->email->subject($subject);
-                $this->email->message($message_replace_email);
+                    // send your email. if it produce an error it will print 'Fail to send your message!' for you
+                    $send = $this->email->send();
 
-                // send your email. if it produce an error it will print 'Fail to send your message!' for you
-                $send = $this->email->send();
-                
-                if($send){
-                    $mail_send = array(
-                        Emails_enum::EMAIL => $mail_address,
-                        Common_enum::STATUS => Common_enum::STATUS_SUCCESSFUL
-                    );
-                    $list_mail_send[] = $mail_send;
+                    if($send){
+                        $mail_send = array(
+                            Emails_enum::EMAIL => $mail_address,
+                            Common_enum::STATUS => Common_enum::STATUS_SUCCESSFUL
+                        );
+                        $list_mail_send[] = $mail_send;
+                    }
+                    else{
+                        $mail_send = array(
+                            Emails_enum::EMAIL => $mail_address,
+                            Common_enum::STATUS => Common_enum::STATUS_ERROR
+                        );
+                        $list_mail_send[] = $mail_send;
+                    }
+                    //  Write to logs
+                    $this->insertTableLogs(Common_enum::ACTION_SEND, $TAG, $this->getError(), $this->getStatus(), $this->current_date, $this->current_date);
                 }
-                else{
-                    $mail_send = array(
-                        Emails_enum::EMAIL => $mail_address,
-                        Common_enum::STATUS => Common_enum::STATUS_ERROR
-                    );
-                    $list_mail_send[] = $mail_send;
-                }
-                //  Write to logs
-                $this->insertTableLogs(Common_enum::ACTION_SEND, $TAG, $this->getError(), $this->getStatus(), $this->current_date, $this->current_date);
+            } catch (Exception $ex) {
+                $this->setError('FAIL');
             }
         }
         else{

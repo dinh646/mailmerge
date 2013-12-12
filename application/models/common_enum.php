@@ -26,4 +26,30 @@ class Common_enum {
     const MASK_TITLES_NAMES = '[Titles_Names]';
     const MASK_EMAIL = '[Email]';
     
+    //  DB
+    const DATABASE_NAME = 'mailmerge';
+    
+    //  NAME FIELD
+    const TYPE = 'type';
+    const CONSTRAINT = 'constraint';
+    const UNSIGNED = 'unsigned';
+    const AUTO_INCREMENT = 'auto_increment';
+    const CHARACTER_SET = 'CHARACTER_SET';
+    const COLLATION = 'collation';
+    
+    //  DEFAULT FIELD VALUE
+    const DEFAULT_CONSTRAINT_DATE_VALUE = 20;
+    const DEFAULT_CONSTRAINT_EMAIL_VALUE = 100;
+    const DEFAULT_CONSTRAINT_FULL_NAME_VALUE = 100;
+    const DEFAULT_CONSTRAINT_TITLES_NAMES_VALUE = 5;
+    const DEFAULT_CONSTRAINT_INT_VALUE = 11;
+    const DEFAULT_AUTO_INCREMENT_VALUE = TRUE;
+    const DEFAULT_CHARACTER_SET_VALUE = 'utf8';
+    const DEFAULT_COLLATION_VALUE = 'utf8_general_ci';
+    
+    //  Datatype
+    const INT = 'INT';
+    const TEXT = 'TEXT';
+    const VARCHAR = 'VARCHAR';
+    
 }
