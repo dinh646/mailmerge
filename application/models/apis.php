@@ -34,10 +34,10 @@ class Apis extends CI_Model{
         
         //  Init Database
         $this->connect = $this->load->database();
-        if(!$this->connect){
-            $this->ERROR = 'Connect database fail.';
-//            return;
-        }
+//        if(!$this->connect){
+//            $this->ERROR = 'Connect database fail.';
+////            return;
+//        }
         
     }
     
