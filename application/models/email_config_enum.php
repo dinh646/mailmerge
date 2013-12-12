@@ -23,7 +23,7 @@ class Email_config_enum {
     const UPDATED_DATE = 'updated_date';
     
     //  More
-    const TABLE_NAME = '_email_config';
+    const TABLE_NAME = 'mailmerge_email_config';
     
     const PROTOCOL_DEFAULT = 'smtp';
     const SMTP_HOST_DEFAULT = 'ssl://smtp.googlemail.com';

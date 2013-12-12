@@ -20,5 +20,5 @@ class Templates_enum {
     const UPDATED_DATE = 'updated_date';
     
     // More
-    const TABLE_NAME = '_templates';
+    const TABLE_NAME = 'mailmerge_templates';
 }

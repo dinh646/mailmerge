@@ -21,5 +21,5 @@ class Logs_enum {
     const UPDATED_DATE = 'updated_date';
     
     //  More
-    const TABLE_NAME = '_logs';
+    const TABLE_NAME = 'mailmerge_logs';
 }

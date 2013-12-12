@@ -32,6 +32,13 @@ class Apis extends CI_Model{
         
         $this->STATUS = '';
         
+        //  Init Database
+        $this->connect = $this->load->database();
+        if(!$this->connect){
+            $this->ERROR = 'Connect database fail.';
+//            return;
+        }
+        
     }
     
     public function setError($e) {
@@ -50,6 +57,10 @@ class Apis extends CI_Model{
         return $this->STATUS;
     }
     
+    public function checkConnectDatabse() {
+        return $this->connect;
+    }
+    
     /*--------------------------------------------------------------------------
      *
      *                      TABLE EMAILS
@@ -61,8 +72,6 @@ class Apis extends CI_Model{
      * @return Array
      */
     public function getTableEmails() {
-        
-        $this->load->database();
         $results = array();
         
         $select_all = $this->db->get(Emails_enum::TABLE_NAME)->result();
@@ -90,7 +99,7 @@ class Apis extends CI_Model{
      * @return Array
      */
     public function getTableEmailsById($id) {
-        $this->load->database();
+        
         $select_all = $this->db->get_where(Emails_enum::TABLE_NAME, array(Emails_enum::ID => $id))->result();
         $row = array(
                      Emails_enum::ID => $select_all[0]->id,
@@ -121,7 +130,7 @@ class Apis extends CI_Model{
                       Emails_enum::UPDATED_DATE => ($u_d == null)? $this->current_date : $u_d,
         );
         try{
-            $this->load->database();
+            
             $insert = $this->db->insert(Emails_enum::TABLE_NAME, $data);
             if(!$insert){
                 $this->setError($this->db->_error_message());
@@ -158,7 +167,7 @@ class Apis extends CI_Model{
                       Emails_enum::UPDATED_DATE => ($u_d == null)? $this->current_date : $u_d,
         );
         try{
-            $this->load->database();
+            
             $this->db->where('id', $id);
             $edit = $this->db->update(Emails_enum::TABLE_NAME, $data); 
             
@@ -185,7 +194,7 @@ class Apis extends CI_Model{
      */
     public function deleteTableEmails($id){
         try{
-            $this->load->database();
+            
             $this->db->where('id', $id);
             $delete = $this->db->delete(Emails_enum::TABLE_NAME); 
             if(!$delete){
@@ -215,7 +224,7 @@ class Apis extends CI_Model{
      * @return Array
      */
     public function getTableEmailConfig() {
-        $this->load->database();
+        
         $results = array();
         
         $select_all = $this->db->get(Email_config_enum::TABLE_NAME)->result();
@@ -244,7 +253,7 @@ class Apis extends CI_Model{
      * @return Array
      */
     public function getTableEmailConfigById($id) {
-        $this->load->database();
+        
         $results = array();
         
         $select_all = $this->db->get_where(Email_config_enum::TABLE_NAME, array(Email_config_enum::ID => $id))->result();
@@ -291,7 +300,7 @@ class Apis extends CI_Model{
                       Email_config_enum::UPDATED_DATE => ($u_d == null)? $this->current_date : $u_d
         );
         try{
-            $this->load->database();
+            
             $insert = $this->db->insert(Email_config_enum::TABLE_NAME, $data);
             if(!$insert){
                 $this->setError($this->db->_error_message());
@@ -336,7 +345,7 @@ class Apis extends CI_Model{
                       Email_config_enum::UPDATED_DATE => ($u_d == null)? $this->current_date : $u_d
         );
         try{
-            $this->load->database();
+            
             $this->db->where('id', $id);
             $edit = $this->db->update(Email_config_enum::TABLE_NAME, $data); 
             if(!$edit){
@@ -362,7 +371,7 @@ class Apis extends CI_Model{
      */
     public function deleteTableEmailConfig($id){
         try{
-            $this->load->database();
+            
             $this->db->where('id', $id);
             $delete= $this->db->delete(Email_config_enum::TABLE_NAME); 
             if(!$delete){
@@ -405,7 +414,7 @@ class Apis extends CI_Model{
                       Logs_enum::UPDATED_DATE => ($u_d == null)? $this->current_date : $u_d
         );
         try{
-            $this->load->database();
+            
             $insert = $this->db->insert(Logs_enum::TABLE_NAME, $data);
             if(!$insert){
                 $this->setError($this->db->_error_message());
@@ -434,7 +443,7 @@ class Apis extends CI_Model{
      * @return Array
      */
     public function getTableTemplates() {
-        $this->load->database();
+        
         $results = array();
         $select_all = $this->db->get(Templates_enum::TABLE_NAME)->result();
         foreach ($select_all as $value) {
@@ -460,7 +469,7 @@ class Apis extends CI_Model{
      * @return Array
      */
     public function getTableTemplatesById($id) {
-        $this->load->database();
+        
         $results = array();
         $select_all = $this->db->get_where(Templates_enum::TABLE_NAME, array(Templates_enum::ID => $id))->result();
         foreach ($select_all as $value) {
@@ -496,7 +505,7 @@ class Apis extends CI_Model{
                       Templates_enum::UPDATED_DATE => ($u_d == null)? $this->current_date : $u_d
         );
         try{
-            $this->load->database();
+            
             $insert = $this->db->insert(Templates_enum::TABLE_NAME, $data);
             if(!$insert){
                 $this->setError($this->db->_error_message());
@@ -532,7 +541,7 @@ class Apis extends CI_Model{
                       Templates_enum::UPDATED_DATE => ($u_d == null)? $this->current_date : $u_d
         );
         try{
-            $this->load->database();
+            
             $this->db->where('id', $id);
             $edit = $this->db->update(Templates_enum::TABLE_NAME, $data); 
             if(!$edit){
@@ -558,7 +567,7 @@ class Apis extends CI_Model{
      */
     public function deleteTableTemplates($id){
         try{
-            $this->load->database();
+            
             $this->db->where('id', $id);
             $delete= $this->db->delete(Templates_enum::TABLE_NAME); 
             if(!$delete){

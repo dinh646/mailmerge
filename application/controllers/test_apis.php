@@ -27,7 +27,7 @@ class Test_apis extends CI_Controller {
 //                $get_data_table_emails = $this->apis->getTableEmails();
                 
 //                    var_dump($get_data_table_emails);
-//                $this->apis->insertTableEmails('xinhhuynh@innoria.com', 'Mr', 'Huynh Xinh');
+                $this->apis->insertTableEmails('xinhhuynh@innoria.com', 'Mr', 'Huynh Xinh');
 //                
 //                var_dump($this->apis->getError());
                 
