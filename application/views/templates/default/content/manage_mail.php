@@ -7,22 +7,14 @@
     </div>
     <div class="input_items">
       <div class="info_add_email">
-          
           <div class="keyvalueeditor-row" data-orther="1">
             <input id="param_email" type="text" class="keyvalueeditor-key keyvalueeditor_check_status" placeholder="Email"  name="keyvalueeditor-action" value="">
-            <input id="param_full_name" type="text" class="keyvalueeditor-key keyvalueeditor_check_status" placeholder="Full name"  name="keyvalueeditor-action" value="">
-            <input id="param_titles_name" type="text" class="keyvalueeditor-key keyvalueeditor_check_status" placeholder="Titles name vd: MR. "  name="keyvalueeditor-action" value="">
-            <!--<select id="param_titles_name">
-              <option value="n">MR. </option>
-              <option value="y">MS. </option>
-            </select>-->
-
+            <input id="param_full_name" type="text" class="keyvalueeditor-key keyvalueeditor_check_status" placeholder="H? và tên"  name="keyvalueeditor-action" value="">
+            <input id="param_titles_name" type="text" class="keyvalueeditor-key keyvalueeditor_check_status" placeholder="Xýng danh vd: Mr "  name="keyvalueeditor-action" value="">
           </div>
-          <input id="btn_add_email" type="submit" class="keyvalueeditor-key"  value="LÆ°u">
-        <!--  <input type="submit" value="Them" id="btn_add_email">-->
-          
-          
       </div>
+    </div>
+    <div class="div_btn_save"><input id="btn_add_email" type="submit" value="LÆ°u"></div>
       <div class="list_email_added">
         <ul class="title_email_list">
           <li>
@@ -32,12 +24,12 @@
           </li>
           <li>
             <div class="text">
-              <span>Full name</span>
+              <span>H? và tên</span>
             </div>
           </li>
           <li>
             <div class="text">
-              <span>Titles name</span>
+              <span>Xýng danh</span>
             </div>
           </li>
           
@@ -45,6 +37,7 @@
         
         
         <?php 
+         $stt=1;
             foreach ($email_list as $email_item){
                 $id      = $email_item['id'];
                 $email      = $email_item['email'];
@@ -52,7 +45,34 @@
                 $full_name      = $email_item['full_name'];
                 $created_date      = $email_item['created_date'];
                 $updated_date      = $email_item['updated_date'];
+                if($stt%2!=0){
                   echo  '
+                        <ul class="blue">
+                          <li>
+                            <div class="text">
+                              <span>'.$email.'</span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="text">
+                              <span>'.$full_name.'</span>
+                            </div>
+                          </li>
+                          <li>
+                            <div class="text">
+                              <span>'.$titles_names.'</span>
+                            </div>
+                          </li>
+                          <li class="delete_mail">
+                            <div class="text">
+                              <a href="'.$url.'index.php/home_controller/delete_mail?id_mail='.$id.'"><span>xóa</span></a>
+                            </div>
+                          </li>
+                        </ul>';
+                 }
+                
+                else{
+                   echo  '
                         <ul >
                           <li>
                             <div class="text">
@@ -71,13 +91,14 @@
                           </li>
                           <li class="delete_mail">
                             <div class="text">
-                              <a href="'.$url.'index.php/home_controller/delete_mail?id_mail='.$id.'"><span>del</span></a>
+                              <a href="'.$url.'index.php/home_controller/delete_mail?id_mail='.$id.'"><span>xóa</span></a>
                             </div>
                           </li>
                         </ul>';
-
-
-            }
+                    }
+                  
+                  $stt=$stt+1;
+                }
         
         ?>
        
@@ -90,7 +111,7 @@
       
     </div>
   </div>
-</div>
+
 
 <script>
   $('#btn_add_email').click(function (){

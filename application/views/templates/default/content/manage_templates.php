@@ -1,9 +1,19 @@
 
 <?php $url = base_url();?>
+<script>
+  $(document).ready(function() {
+     $("#dialog_help").css({
+       display: "none"
+     });
+ });
+</script>
 <div id="form_content_mail">
   <div class="page_center">
     <div class="banner_mail">
       <div class="logo_sendmail">
+      </div>
+      <div id="show_help" class="show_list_template">
+        <span class="help"><div class="text">Hướng dẫn</div></span>
       </div>
     </div>
     <div class="input_items">
@@ -20,7 +30,7 @@
       </div>
     </div>
     <div class="editor_form">
-      <span>Content</span>
+      <span class="title_content">Nội dung</span>
       <script src="<?php echo $url;?>templates/default/plugins/ckeditor/ckeditor.js"></script>
         <form action="#" method="post">
               <p>
@@ -71,15 +81,37 @@
             </li>
            </ul>
       
-    
+   
     </div>
     <div class="btn_save">
-        <input id="btn_add_template" type="submit" class="keyvalueeditor-key"  value="Lưu">
+        <input id="btn_add_template" type="submit"  value="Lưu">
     </div>
   </div>
 </div>
+<!--help-->
+<div id="dialog_help">
+  <p>V&iacute; dụ ta c&oacute;&nbsp;nội dung mail mẫu&nbsp;như h&igrave;nh 1. Mail n&agrave;y đ&atilde; được gửi th&agrave;nh c&ocirc;ng.</p>
+
+  <p style="text-align: center;"><img class="preview" src="<?php echo $url; ?>templates/default/img/capture-send.png" style="border-style:solid; border-width:1px; height:300px; width:750px" /></p>
+
+  <p style="text-align: center;">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp;h&igrave;nh 1</p>
+
+  <p>Để soạn&nbsp;được nội dung mail như h&igrave;nh 1, trong khung soạn thảo văn bản&nbsp;ta cần c&oacute; những từ kh&oacute;a đặt biệt sau để nhận biết từ xưng danh, họ t&ecirc;n đầy đủ v&agrave; email, cụ thể như sau (xem h&igrave;nh 2):</p>
+
+  <p>Theo h&igrave;nh 1, tương ứng với từ xưng danh <span style="color:#008000">Mr&nbsp;</span>ta c&oacute; từ kh&oacute;a [Titles_Names], tương ứng với t&ecirc;n <span style="color:#FF8C00">L&ecirc; Vĩnh Ph&uacute;&nbsp;</span>ta&nbsp;c&oacute; từ kh&oacute;a [Full_Name], tương ứng với email <span style="color:#0000FF">phule@innoria.com&nbsp;</span>l&agrave; từ kh&oacute;a [Email] .</p>
+
+  <p><span style="line-height:1.6em; text-align:center">&nbsp;</span><img class="preview" src="<?php echo $url; ?>templates/default/img/capture_editor.png" style="border-style:solid; border-width:1px; height:300px; line-height:1.6em; text-align:center; width:750px" /></p>
+
+  <p style="text-align: center;">h&igrave;nh 2</p>
+
+</div>
+<!--end help-->
+
 <input type="hidden" value="<?php echo $url;?>" id="hidUrl" >
 <script>
+ 
+  
+  
   $('#btn_add_template').click(function (){
     var param_template_name = $('#param_template_name').val();
     var param_subject=$('#param_subject').val();
@@ -163,5 +195,26 @@
         
     
   });
+  
+  $('#show_help').click(function (){
+  
+        $( "#dialog_help" ).dialog({
+          title: "Help", 
+          show: "scale",
+          hide: "explode",
+          closeOnEscape: true,
+          modal: true,
+          minWidth: 800,
+          minHeight: 600,
+          resizable: false,
+          backgroundColor:"red",
+          modal: true
+    
+      });
+  });
+  jQuery("#show_help .ui-dialog-titlebar").css("background-color", "red");
+  
 </script>
+
+ <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 

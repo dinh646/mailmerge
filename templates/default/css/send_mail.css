@@ -178,6 +178,30 @@
   margin-bottom: 50px;
   
 }
+#container_main #form_content_mail .page_center .btn_send_mail{
+  width: 70px;
+  height: 30px;
+  float: left;
+  margin-bottom: 50px;
+  color: #000;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  background-image: -o-linear-gradient(bottom, #F5B30C 0%, #FFD900 100%);
+  background-image: -moz-linear-gradient(bottom, #F5B30C 0%, #FFD900 100%);
+  background-image: -webkit-linear-gradient(bottom, #F5B30C 0%, #FFD900 100%);
+  background-image: -ms-linear-gradient(bottom, #F5B30C 0%, #FFD900 100%);
+  background-image: linear-gradient(to bottom, #F5B30C 0%, #FFD900 100%);
+  
+}
+#container_main #form_content_mail .page_center .btn_send_mail:active{
+  background-image: -o-linear-gradient(bottom, #F5B30C 0%, #FFAA00 100%);
+  background-image: -moz-linear-gradient(bottom, #F5B30C 0%, #FFAA00 100%);
+  background-image: -webkit-linear-gradient(bottom, #F5B30C 0%, #FFAA00 100%);
+  background-image: -ms-linear-gradient(bottom, #F5B30C 0%, #FFAA00 100%);
+  background-image: linear-gradient(to bottom, #F5B30C 0%, #FFAA00 100%);
+  
+}
 
 #container_main #form_content_mail .page_center .table_list_email_to{
   width: 800px;
@@ -252,6 +276,14 @@
   
 }
 
+#container_main #form_content_mail .page_center .table_list_email_to ul li #status_send_mail.loading{
+  background: url('../img/loading.gif');
+  background-size: 20px 20px;
+  background-position: center;
+  background-repeat: no-repeat;
+  
+}
+
 
 #container_main #form_content_mail .page_center .table_list_email_to ul li .text{
   margin-top: 18px;
@@ -297,7 +329,7 @@ select, input[type="text"] .uneditable-input {
 
 #disable_screen {
   width: 100%;
-  height: 100%;
+  height: 10000px;
   margin-top: -100px;
 
  

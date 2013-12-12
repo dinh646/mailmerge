@@ -18,7 +18,31 @@ class Home_controller extends CI_Controller {
 
   public function index()
 	{
-     //load list templates
+     $data['status_active_menu']="manage_mail";
+      $data['email_list']=$this->apis->getTableEmails();
+      $this->load->view('templates/default/header/header_manage_mail.php');
+      $this->load->view('templates/default/menu/menu.php',$data);
+      $this->load->view('templates/default/content/manage_mail.php');
+      $this->load->view('templates/default/footer/footer.php');
+     
+      
+     
+    
+	}
+  
+  public function page_add_email(){
+      
+      $this->load->view('templates/default/header/header_add_email.php');
+      $this->load->view('templates/default/menu/menu.php');
+      $this->load->view('templates/default/content/add_email.php');
+      $this->load->view('templates/default/footer/footer.php');  
+    
+  }
+  
+  public function manage_mail(){
+      
+      
+      //load list templates
       if(isset($_GET['template'])){
          if(strcmp($_GET['template'],"default")!=0){
           $id=$_GET['template'];
@@ -62,28 +86,6 @@ class Home_controller extends CI_Controller {
               $this->load->view('templates/default/footer/footer.php');
            }
     
-     
-      
-     
-    
-	}
-  
-  public function page_add_email(){
-      
-      $this->load->view('templates/default/header/header_add_email.php');
-      $this->load->view('templates/default/menu/menu.php');
-      $this->load->view('templates/default/content/add_email.php');
-      $this->load->view('templates/default/footer/footer.php');  
-    
-  }
-  
-  public function manage_mail(){
-      $data['status_active_menu']="manage_mail";
-      $data['email_list']=$this->apis->getTableEmails();
-      $this->load->view('templates/default/header/header_manage_mail.php');
-      $this->load->view('templates/default/menu/menu.php',$data);
-      $this->load->view('templates/default/content/manage_mail.php');
-      $this->load->view('templates/default/footer/footer.php'); 
   }
   public function delete_mail(){
       $id=$_GET['id_mail'];
@@ -196,13 +198,13 @@ class Home_controller extends CI_Controller {
     
     $id_template   =$_POST['id_template'];
     $id_mail_config  =$_POST['id_mail_form'];
-    $mail_to  =$_POST['mail_to'];
-    $list_id_mail = array($mail_to);
+    $id_mail  =$_POST['id_mail'];
+    $list_id_mail = array($id_mail);
     
     $result=$this->apis->sendListMail($id_mail_config, $id_template, $list_id_mail);  
     
     foreach ($result as $key => $value) {
-      echo $value['status'];
+      echo $value['status'].','.$id_mail;
     }
   }
   public function send_all_mail(){
@@ -211,7 +213,10 @@ class Home_controller extends CI_Controller {
         $send_all      =$_POST['status'];
         
         $result=$this->apis->sendListMail($id_mail_config, $id_template,array(),$send_all);
-        echo $result;
+        foreach ($result as $key => $value) {
+          echo $value['email'].":";
+          echo $value['status']."\n";
+        }
     }
   
   

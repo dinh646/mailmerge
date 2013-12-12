@@ -23,20 +23,62 @@
   
 }
 
+
 #container_main #form_content_mail .page_center .banner_mail{
   width: 900px;
   height: 100px;
   margin: 0 auto;
-  
-  
-/*  background: #005702;*/
+}
+#container_main #form_content_mail .page_center .banner_mail .show_list_template{
+  width: 100px;
+  height: 30px;
+  float: right;
+  margin-top: 10px;
+  margin-right: 10px;
+  cursor:pointer;
+  text-align: center;
+  background: #eee;background-image: -o-linear-gradient(bottom, #F5B30C 0%, #FFD900 100%);
+  background-image: -moz-linear-gradient(bottom, #F5B30C 0%, #FFD900 100%);
+  background-image: -webkit-linear-gradient(bottom, #F5B30C 0%, #FFD900 100%);
+  background-image: -ms-linear-gradient(bottom, #F5B30C 0%, #FFD900 100%);
+  background-image: linear-gradient(to bottom, #F5B30C 0%, #FFD900 100%);
+}
+#container_main #form_content_mail .page_center .banner_mail .show_list_template:active{
+  background-image: -o-linear-gradient(bottom, #F5B30C 0%, #FFAA00 100%);
+  background-image: -moz-linear-gradient(bottom, #F5B30C 0%, #FFAA00 100%);
+  background-image: -webkit-linear-gradient(bottom, #F5B30C 0%, #FFAA00 100%);
+  background-image: -ms-linear-gradient(bottom, #F5B30C 0%, #FFAA00 100%);
+  background-image: linear-gradient(to bottom, #F5B30C 0%, #FFAA00 100%);
+}
+
+
+#container_main #form_content_mail .page_center .banner_mail .show_list_template span .text{
+  width: 100px;
+  height: 15px;
+  margin-top: 6px;
   
 }
+
+#container_main #form_content_mail .page_center .banner_mail .show_list_template span{
+  font-size: 12px;
+  color: #000;
+  font-family: sans-serif;
+  
+  
+}
+
 #container_main #form_content_mail .page_center .editor_form{
   width: 800px;
   height: auto;
   margin-left: 50px;
 }
+#container_main #form_content_mail .page_center .editor_form .title_content{
+  font-size: 15px;
+  color: #999;
+  
+}
+
+
 #container_main #form_content_mail .page_center .img_form{
   width: 800px;
   height: auto;
@@ -80,7 +122,30 @@
   margin-left: 50px;
   
 }
-
+#container_main #form_content_mail .page_center .btn_save #btn_add_template{
+ width: 70px;
+  height: 30px;
+  float: left;
+  margin-bottom: 50px;
+  color: #000;
+  font-family: sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  background-image: -o-linear-gradient(bottom, #F5B30C 0%, #FFD900 100%);
+  background-image: -moz-linear-gradient(bottom, #F5B30C 0%, #FFD900 100%);
+  background-image: -webkit-linear-gradient(bottom, #F5B30C 0%, #FFD900 100%);
+  background-image: -ms-linear-gradient(bottom, #F5B30C 0%, #FFD900 100%);
+  background-image: linear-gradient(to bottom, #F5B30C 0%, #FFD900 100%);
+  
+}
+#container_main #form_content_mail .page_center .btn_save #btn_add_template:active{
+   background-image: -o-linear-gradient(bottom, #F5B30C 0%, #FFAA00 100%);
+  background-image: -moz-linear-gradient(bottom, #F5B30C 0%, #FFAA00 100%);
+  background-image: -webkit-linear-gradient(bottom, #F5B30C 0%, #FFAA00 100%);
+  background-image: -ms-linear-gradient(bottom, #F5B30C 0%, #FFAA00 100%);
+  background-image: linear-gradient(to bottom, #F5B30C 0%, #FFAA00 100%);
+  
+}
 
 select, input[type="text"] .uneditable-input {
   display: inline-block;

@@ -21,6 +21,46 @@
   float: left;
 }
 
+#container_main #form_content_mail .page_center .div_btn_save{
+  width: 800px;
+  height: auto;
+  margin-left: 50px;
+  float: left;
+}
+#container_main #form_content_mail .page_center .div_btn_save{
+  width: 800px;
+  height: auto;
+  margin-left: 50px;
+  float: left;
+}
+#container_main #form_content_mail .page_center .div_btn_save #btn_add_email{
+  width: 70px;
+  height: 30px;
+  float: left;
+  margin-bottom: 50px;
+  color: #000;
+  font-family: Arial, sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  background-image: -o-linear-gradient(bottom, #F5B30C 0%, #FFD900 100%);
+  background-image: -moz-linear-gradient(bottom, #F5B30C 0%, #FFD900 100%);
+  background-image: -webkit-linear-gradient(bottom, #F5B30C 0%, #FFD900 100%);
+  background-image: -ms-linear-gradient(bottom, #F5B30C 0%, #FFD900 100%);
+  background-image: linear-gradient(to bottom, #F5B30C 0%, #FFD900 100%);
+  
+  
+}
+#container_main #form_content_mail .page_center .div_btn_save #btn_add_email:active{
+
+   background-image: -o-linear-gradient(bottom, #F5B30C 0%, #FFAA00 100%);
+  background-image: -moz-linear-gradient(bottom, #F5B30C 0%, #FFAA00 100%);
+  background-image: -webkit-linear-gradient(bottom, #F5B30C 0%, #FFAA00 100%);
+  background-image: -ms-linear-gradient(bottom, #F5B30C 0%, #FFAA00 100%);
+  background-image: linear-gradient(to bottom, #F5B30C 0%, #FFAA00 100%);
+  
+  
+}
+
 #container_main #form_content_mail .page_center .banner_mail{
   width: 900px;
   height: 100px;
@@ -33,24 +73,24 @@
 
 #container_main #form_content_mail .page_center .input_items{
   width: 900px;
-  height: 200px;
+  height: auto;
   margin: 0 auto;
   
 }
 #container_main #form_content_mail .page_center .input_items .info_add_email{
   width: 800px;
-  height: 150px;
-  margin: 0 auto;
+  height: auto;
   margin-left: 50px;
 
   
 }
 #container_main #form_content_mail .page_center .list_email_added{
   width: 800px;
-  height: 150px;
-  margin: 0 auto;
+  height: auto;
   margin-left: 50px;
-
+  border: 1px solid #ddd;
+  float: left;
+  margin-bottom: 20px;
 
 }
 
@@ -58,19 +98,51 @@
 #container_main #form_content_mail .page_center .list_email_added ul{
   width: 800px;
   height: auto;
-  margin: 0 auto;
  list-style: none;
+  float: left;
+  
+}
+#container_main #form_content_mail .page_center .list_email_added ul.blue{
+ 
   background: #eee;
 }
+#container_main #form_content_mail .page_center .list_email_added ul li .text{
+  margin-top: 18px;
+}
 
+
+
+#container_main #form_content_mail .page_center .list_email_added ul.title_email_list{
+  width: 800px;
+  height: auto;
+ list-style: none;
+  float: left;
+}
+#container_main #form_content_mail .page_center .list_email_added ul.title_email_list li .text span{
+  color: #000;
+  font-size: 15px;
+  font-weight: bold;
+  
+}
 #container_main #form_content_mail .page_center .list_email_added ul li{
   width: 200px;
-  height: 30px;
+  height: 50px;
   
   float: left;
   margin-left: 10px;
 }
-
+#container_main #form_content_mail .page_center .list_email_added ul li{
+  width: 200px;
+  height: 50px;
+  
+  float: left;
+  margin-left: 10px;
+}
+#container_main #form_content_mail .page_center .list_email_added ul li .text{
+ font-size: 12px;
+ font-family: Arial, sans-serif;
+  
+}
 
 
 #container_main #form_content_mail .page_center .list_email_added ul .delete_mail{

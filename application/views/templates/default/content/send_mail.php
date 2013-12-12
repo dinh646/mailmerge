@@ -58,7 +58,7 @@
 
     </div>
    
-    <div class="title_content_mail"><span>Tiêu đề mail</span></div>
+    <div class="title_content_mail"><span>Tiêu đ�? mail</span></div>
     <div class="subject_mail"><span>
       <?php 
       if(!empty($subject_mail)){
@@ -125,7 +125,7 @@
         </li>
         <li >
           <div class="text">
-            <input type="radio" name="option_send_mail" onClick="option_send_mail(this)" id="option_send_mail"><span>Tùy chọn gửi mail</span>
+            <input type="radio" name="option_send_mail" onClick="option_send_mail(this)" id="option_send_mail"><span>Tùy ch�?n gửi mail</span>
           </div>
         </li>
       </ul>
@@ -140,7 +140,7 @@
        <ul class="title_email_list">
           <li class="chose_email">
             <div class="text">
-              <span>chọn email</span>
+              <span>ch�?n email</span>
             </div>
           </li>
           <li class="li_email">
@@ -160,7 +160,7 @@
           </li>
           <li>
             <div class="text">
-              <span>Status</span>
+              <span>Tr?ng th�i</span>
             </div>
           </li>
           
@@ -173,12 +173,12 @@
                 <ul class="ul_check_all">
                   <li>
                     <div class="text">
-                      <input value="status" name="check_all" type="checkbox" onClick="toggle(this)" id="check_all" ><span>Chọn tất cả</span>
+                      <input value="status" name="check_all" type="checkbox" onClick="toggle(this)" id="check_all" ><span>Ch�?n tất cả</span>
                     </div>
                   </li>
                   <li >
                     <div class="text">
-                      <input type="checkbox" name="invert_check" onClick="invert(this)"><span>Đảo vùng chọn</span>
+                      <input type="checkbox" name="invert_check" onClick="invert(this)"><span>�?ảo vùng ch�?n</span>
                     </div>
                   </li>
                   <li>
@@ -228,7 +228,7 @@
                           </li>
                            <li>
                             <div class="text">
-                              <div id="status_send_mail" class="error">
+                              <div id="status_send_mail" class="status_send_mail_'.$id.' ">
                               </div>
                             </div>
                           </li>
@@ -262,7 +262,7 @@
                           </li>
                           <li>
                             <div class="text">
-                              <div id="status_send_mail_'.$id.'">
+                              <div id="status_send_mail" class="status_send_mail_'.$id.' ">
                               </div>
                             </div>
                           </li>
@@ -287,7 +287,7 @@
     
     
     <div class="btn_save">
-        <input id="btn_send_mail" type="submit" class="keyvalueeditor-key"  value="Send">
+        <input class="btn_send_mail" id="btn_send_mail" type="submit" value="Send">
     </div>
     
     
@@ -299,260 +299,12 @@
 <input type="hidden" value="" id="from_mail">
 <input type="hidden" value="<?php echo $id_template;?>" id="id_template">
 
-<script>
- 
- $(document).ready(function() {
-     $("#disable").css({
-       display: "none"
-     });
- });
-   
-   function displayResult(selTag)
-    {
-      var x=selTag.options[selTag.selectedIndex].text;
-      $('#from_mail').val(x);
-    }
-  
-  function toggle(source) {
-      //invert_check
-       var checkboxes1 = document.getElementsByName('invert_check');
-      for(var i=0, n=checkboxes1.length;i<n;i++) {
-        checkboxes1[i].checked = false;
-      }
-      
-      var checkboxes = document.getElementsByName('list_mail_check');
-      for(var i=0, n=checkboxes.length;i<n;i++) {
-      checkboxes[i].checked = source.checked;
-     }
-   }
-   
-    function toggle_item(source) {
-      var checkboxes = document.getElementsByName('check_all');
-      var checkboxes1 = document.getElementsByName('invert_check');
-      for(var i=0, n=checkboxes.length;i<n;i++) {
-        checkboxes[i].checked = false;
-      }
-      for(var i=0, n=checkboxes1.length;i<n;i++) {
-        checkboxes1[i].checked = false;
-      }
-      
-   }
-   
-    function invert(source) {
-      //check all==false
-         var checkboxes = document.getElementsByName('check_all');
-          for(var i=0, n=checkboxes.length;i<n;i++) {
-            checkboxes[i].checked = false;
-          }
-          
-          var checkboxes = document.getElementsByName('list_mail_check');
-          for(var i=0, n=checkboxes.length;i<n;i++) {
-            if(checkboxes[i].checked == false){
-             checkboxes[i].checked = true;
-            }
-            else{
-              checkboxes[i].checked = false;
-            }
-           
-         }
-       }
-    
-   function send_all_mail(source) {
-      var checkboxes = document.getElementsByName('option_send_mail');
-      for(var i=0, n=checkboxes.length;i<n;i++) {
-        checkboxes[i].checked = false;
-      }
-       $("#disable").css({
-         display: "none"
-       });
-      
-      
-   }
-    function option_send_mail(source) {
-      var checkboxes = document.getElementsByName('send_all_mail');
-      for(var i=0, n=checkboxes.length;i<n;i++) {
-        checkboxes[i].checked = false;
-      }
-       $("#disable").css({
-       display: "block"
-       });
-      
-      
-      
-   }
-   
-   
-   
-  $('#btn_send_mail').click(function (){
-    var id_template=$('#id_template').val();
-    var id_mail_form=$('.info_send_mail').val();
-    
-    var send_all_mail = document.getElementsByName('send_all_mail');
-    var option_send_mail = document.getElementsByName('option_send_mail');
-    
-    
-   //check error param
-    var error="";
-    if(id_template=="default"){
-      error=error+"bạn chưa chọn template!\n\
-       ";
-    }
-    if(send_all_mail[0].checked==false && option_send_mail[0].checked==false){
-      
-      error=error+'bạn chưa chọn mail để gửi!';
-    }
-    
-    
-    if(error!=""){
-      alert(error);
-    }
-    
-    //start send mail------
-    if(error==""){
-      
-        //if send all mail=======================================================
-        var send_all_mail = document.getElementsByName('send_all_mail');
-        if(send_all_mail[0].checked==true){
-           $("#disable_screen").addClass("active");
-           var data={
-                  id_template:id_template,
-                  id_mail_form:id_mail_form,
-                  status:"send_all"
-            }
-           var url_api = $('#hidUrl').val()+'index.php/home_controller/send_all_mail';
-            $.ajax({
-             url: url_api ,
-             type: 'POST',
-             data:data,
-             success: function(data){
-               //alert(data);
-               $("#disable_screen").removeClass("active");
-             },
-            error: function(a,textStatus,b){
-              alert('khong thanh cong');
-            }
-          });
-         }
 
-        //if option send mail======================================================
-        var option_send_mail = document.getElementsByName('option_send_mail');
-        if(option_send_mail[0].checked==true){
-           //list mail to
-            var checkedValue; 
-            var inputElements = $('input:checkbox[name="list_mail_check"]:checked');
-            var url_api = $('#hidUrl').val()+'index.php/home_controller/send_mail';
-           
-            //vong lap for send one email
-            for(var i=0; inputElements[i]; ++i){
-                 checkedValue=inputElements[i].value;                
-                 var data={
-                    id_template:id_template,
-                    id_mail_form:id_mail_form,
-                    mail_to:checkedValue
-                  }
-                   $.ajax({
-                      url: url_api ,
-                      type: 'POST',
-                      data:data,
-                      success: function(data){
-                        alert(data);
-                       /* if(data=="SUCCESSFUL"){
-                            var status="#status_send_mail_"+checkedValue;
-                            $(status).addClass('success');
-                          }
-                          if(data=="ERROR"){
-                            var status="#status_send_mail_"+checkedValue;
-                            $(status).addClass('error');
-                          }
-                          */
-                      },
-                     error: function(a,textStatus,b){
-                       alert('khong thanh cong');
-                     }
-                   });
-                   
-                   
-                   
-            }
-             
-               
-               
-          }
-
-    }
-    //end if error
-    
-    function strcmp (str1, str2) {
-      return ((str1 == str2) ? 0 : ((str1 > str2) ? 1 : -1));
-    }
-    
-    
-    
-    
-    
-   /*    $("#disable_screen").addClass("active");
-       var id_template=$('#id_template').val();
-       var id_mail_form=$('.info_send_mail').val();
-      // var list_mail_to=$('#id_s').val();
-       //list mail to
-        var checkedValue = ""; 
-        var inputElements = $('input:checkbox[name="list_mail_check"]:checked');
-        for(var i=0; inputElements[i]; ++i){
-                   checkedValue = checkedValue+','+inputElements[i].value;
-        }
-        if(checkedValue==""){
-          checkedValue="null";
-        }
-        else
-          {
-            
-            checkedValue=checkedValue.slice(1);
-          }
-       //check all status
-       var checkall="false";
-       if($("#check_all").is(":checked")){
-         checkall="true";
-       }
-         
-         
-         
-      /* alert('sub:'+param_subject+'\n\
-              id_template:'+id_template+'\n\
-              id_mail_form:'+id_mail_form+'\n\
-              list_mail_to:'+checkedValue+'\n\
-               checkall:'+checkall
-               );*/
-       
-     /*    var data={
-                id_template:id_template,
-                id_mail_form:id_mail_form,
-                list_mail_to:checkedValue ,
-                checkall:checkall
-          }
-        
-    var url_api = $('#hidUrl').val()+'index.php/home_controller/send_mail'
-   // alert(url_api);
-      $.ajax({
-          url: url_api ,
-          type: 'POST',
-          data:data,
-          success: function(data){
-            
-            //alert('them thanh cong');
-          //  location.reload();
-            alert(data);
-          },
-
-         //timeout:5000,
-         error: function(a,textStatus,b){
-           alert('khong thanh cong');
-         }
-       });*/
-  });
-</script>
 
 <div id="disable_screen">
   <div class="img_load_send">
     
   </div>
 </div>
+
+ <script src="<?php echo $url;?>templates/default/js/send_mail.js"></script>

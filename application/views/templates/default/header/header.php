@@ -5,9 +5,10 @@
     <link rel="stylesheet" href="<?php echo $url;?>templates/default/css/default.css">
     <link rel="stylesheet" href="<?php echo $url;?>templates/default/css/menu.css">
     <link rel="stylesheet" href="<?php echo $url;?>templates/default/css/send_mail.css">
-    <script src="<?php echo $url;?>templates/default/js/common.js"></script>
-    <script src="<?php echo $url;?>templates/default/js/jquery-2.0.3.min.js"></script>
     
+    <script src="<?php echo $url;?>templates/default/js/jquery-2.0.3.min.js"></script>
+    <script src="<?php echo $url;?>templates/default/js/common.js"></script>
+   
     
     
   </head>
