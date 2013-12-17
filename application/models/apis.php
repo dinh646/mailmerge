@@ -106,6 +106,11 @@ class Apis extends CI_Model{
             //  TODO - Create database
             //
         }
+    
+//            var_dump(APPPATH);
+//        require_once APPPATH.'third_party/PHPExcel.php';
+//        $this->excel = new PHPExcel();
+        
     }
     
     public function setError($e) {
@@ -659,42 +664,42 @@ class Apis extends CI_Model{
     //
     //  list mail to
     //
-    function sendMail($protocol, $smtp_host, $smtp_port, $mailtype, 
-                      $from_mail=null, $pass=null, $full_name=null, 
-                      $to_mail=null, $subject=null, $message=null){
-        
-        $TAG = 'sendMail';
-        
-        $config = array(
-            'protocol' => $protocol,
-            'smtp_host' => $smtp_host,
-            'smtp_port' => $smtp_port,
-            'smtp_user' => $from_mail,
-            'smtp_pass' => $pass,
-            'mailtype' => $mailtype
-        );
- 
-        // load the email library that provided by CI
-        $this->load->library('email', $config);
-        // this will bind your attributes to email library
-        $this->email->set_newline("\r\n");
-        $this->email->from($from_mail, $full_name);
-        $this->email->to($to_mail);
-        $this->email->subject($subject);
-        $this->email->message($message);
- 
-        // send your email. if it produce an error it will print 'Fail to send your message!' for you
-        $send = $this->email->send();
-        
-         if($send){
-             $this->setStatus(Common_enum::STATUS_SUCCESSFUL);
-         }
-         else{
-             $this->setError('Send to'.$to_mail.' fail');
-             
-         }
-         $this->insertTableLogs(Common_enum::ACTION_SEND, $TAG, $this->getError(), $this->getStatus(), $this->current_date, $this->current_date);
-    }
+//    function sendMail($protocol, $smtp_host, $smtp_port, $mailtype, 
+//                      $from_mail=null, $pass=null, $full_name=null, 
+//                      $to_mail=null, $subject=null, $message=null){
+//        
+//        $TAG = 'sendMail';
+//        
+//        $config = array(
+//            'protocol' => $protocol,
+//            'smtp_host' => $smtp_host,
+//            'smtp_port' => $smtp_port,
+//            'smtp_user' => $from_mail,
+//            'smtp_pass' => $pass,
+//            'mailtype' => $mailtype
+//        );
+// 
+//        // load the email library that provided by CI
+//        $this->load->library('email', $config);
+//        // this will bind your attributes to email library
+//        $this->email->set_newline("\r\n");
+//        $this->email->from($from_mail, $full_name);
+//        $this->email->to($to_mail);
+//        $this->email->subject($subject);
+//        $this->email->message($message);
+// 
+//        // send your email. if it produce an error it will print 'Fail to send your message!' for you
+//        $send = $this->email->send();
+//        
+//         if($send){
+//             $this->setStatus(Common_enum::STATUS_SUCCESSFUL);
+//         }
+//         else{
+//             $this->setError('Send to'.$to_mail.' fail');
+//             
+//         }
+//         $this->insertTableLogs(Common_enum::ACTION_SEND, $TAG, $this->getError(), $this->getStatus(), $this->current_date, $this->current_date);
+//    }
 
     public function sendListMail($id_mail_config, $id_template, $list_id_mail, $send_all = null) {
         $TAG = '';
@@ -703,7 +708,6 @@ class Apis extends CI_Model{
         $temp_template = $this->getTableTemplatesById($id_template);
 
         $list_mail_send = array();
-        
         if( (is_array($list_id_mail)) && 
             (is_array($temp_mail_cofig) && sizeof($temp_mail_cofig)) && 
             (is_array($temp_template) && sizeof($temp_template)) 
@@ -751,7 +755,6 @@ class Apis extends CI_Model{
             try{
                 // load the email library that provided by CI
                 $this->load->library('email', $config);
-                $this->setError($this->email->get_error());
                 foreach ($list_mail as $mail) {
 
                     $mail_address = $mail['email'];
@@ -772,7 +775,7 @@ class Apis extends CI_Model{
 
                     // send your email. if it produce an error it will print 'Fail to send your message!' for you
                     $send = $this->email->send();
-
+                    var_dump('$send');
                     if($send){
                         $mail_send = array(
                             Emails_enum::EMAIL => $mail_address,
@@ -799,5 +802,151 @@ class Apis extends CI_Model{
         }
         return $list_mail_send;
     }
+ 
+    public function sendListMailFromExcel($id_mail_config, $id_template, $path = null) {
+        $TAG = 'sendListMailFromExcel';
+        $temp_mail_cofig = $this->getTableEmailConfigById($id_mail_config);
+        $temp_template = $this->getTableTemplatesById($id_template);
+
+        $list_mail = $this->readFileExcel($path);
+        
+        $list_mail_send = array();
+        if( (is_array($list_id_mail)) && 
+            (is_array($temp_mail_cofig) && sizeof($temp_mail_cofig)) && 
+            (is_array($temp_template) && sizeof($temp_template)) 
+            ){
+
+            //
+            //  Get list mail from list_id_mail
+            //
+//            $list_mail = array();
+//            if($send_all == null){
+//                foreach ($list_id_mail as $id_mail) {
+//                    $list_mail[] = $this->getTableEmailsById($id_mail);
+//                }
+//            }
+//            else{
+//                $list_mail = $this->getTableEmails();
+//            }
+            
+            //
+            //  Load mail config
+            //
+            $mail_cofig = $temp_mail_cofig[0];
+            $protocol = $mail_cofig['protocol'];
+            $smtp_host = $mail_cofig['smtp_host'];
+            $smtp_port = $mail_cofig['smtp_port'];
+            $from_mail = $mail_cofig['email_send'];
+            $pass = $mail_cofig['password'];
+            $mailtype = $mail_cofig['mailtype'];
+
+            $config = array(
+                'protocol' => $protocol,
+                'smtp_host' => $smtp_host,
+                'smtp_port' => $smtp_port,
+                'smtp_user' => $from_mail,
+                'smtp_pass' => $pass,
+                'mailtype' => $mailtype
+            );
+            
+            //
+            //  Load mail template
+            //
+            $template = $temp_template[0];
+            $subject = $template['subject'];
+            $content = html_entity_decode($template['content']);
+            try{
+                // load the email library that provided by CI
+                $this->load->library('email', $config);
+                foreach ($list_mail as $mail) {
+
+                    $mail_address = $mail['email'];
+                    $titles_name = $mail['titles_names'];
+                    $full_name = $mail['full_name'];
+
+                    $message_replace_full_name = str_replace(Common_enum::MASK_FULL_NAME, $full_name, $content);
+                    $message_replace_titles_names = str_replace(Common_enum::MASK_TITLES_NAMES, $titles_name, $message_replace_full_name);
+                    $message_replace_email = str_replace(Common_enum::MASK_EMAIL, $mail_address, $message_replace_titles_names);
+
+                    // this will bind your attributes to email library
+                    $this->email->set_newline("\r\n");
+
+                    $this->email->from($from_mail/*, $full_name*/);
+                    $this->email->to($mail_address);
+                    $this->email->subject($subject);
+                    $this->email->message($message_replace_email);
+
+                    // send your email. if it produce an error it will print 'Fail to send your message!' for you
+                    $send = $this->email->send();
+                    var_dump('$send');
+                    if($send){
+                        $mail_send = array(
+                            Emails_enum::EMAIL => $mail_address,
+                            Common_enum::STATUS => Common_enum::STATUS_SUCCESSFUL
+                        );
+                        $list_mail_send[] = $mail_send;
+                    }
+                    else{
+                        $mail_send = array(
+                            Emails_enum::EMAIL => $mail_address,
+                            Common_enum::STATUS => Common_enum::STATUS_ERROR
+                        );
+                        $list_mail_send[] = $mail_send;
+                    }
+                    //  Write to logs
+                    $this->insertTableLogs(Common_enum::ACTION_SEND, $TAG, $this->getError(), $this->getStatus(), $this->current_date, $this->current_date);
+                }
+            } catch (Exception $ex) {
+                $this->setError('FAIL');
+            }
+        }
+        else{
+            $this->setError('Can\'t load mail config or template or get list mail to');
+        }
+        return $list_mail_send;
+    }
+    
+    function sheetData($sheet) {
+        $re = '<table>';     // starts html table
+
+        $x = 1;
+        while($x <= $sheet['numRows']) {
+          $re .= "<tr>\n";
+          $y = 1;
+          while($y <= $sheet['numCols']) {
+            $cell = isset($sheet['cells'][$x][$y]) ? $sheet['cells'][$x][$y] : '';
+            $re .= " <td>$cell</td>\n";  
+            $y++;
+          }  
+          $re .= "</tr>\n";
+          $x++;
+        }
+
+        return $re .'</table>';     // ends and returns the html table
+      }
+    
+    public function readFileExcel($path = '') {
+        
+        $this->load->library("excel_reader");
+        $excel = new Excel_reader();
+        $excel->read($path);
+        
+        $list_mail = array();
+        
+        $sheets = $excel->sheets;
+        foreach ($sheets as $s_i => $sheet) {   //  loop all sheets
+            $cells = $sheet['cells'];
+                
+            foreach ($cells as $cell) {
+                $list_mail []= $cell[1];
+            }
+        }
+        return $list_mail;
+    }
+    
+    public function readerFileExcel($path) {
+        
+    }
+    
     
 }

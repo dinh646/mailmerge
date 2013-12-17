@@ -47,10 +47,11 @@ class Test_apis extends CI_Controller {
                 
 //                $this->apis->deleteTableTemplates(2);
 //                    $this->apis->sendMail('xinhhuynh@innoria.com', 'Xinh1091646', 'Xinh Huynh', 'xinhhuynh@innoria.com', 'Subject', 'Message...bla bla....');
-//                echo "hwllo";
 //                var_dump($this->apis->sendListMail(8, 3, array(20)));
-                
-                var_dump($this->apis->getError());
+//                
+//                $this->apis->getError();
+//        var_dump('lskjdf');
+        var_dump($this->apis->readFileExcel());
                 
 	}
 }
